@@ -13,7 +13,7 @@ const questionReducer = (state = initState, action) => {
             case 'QUESTION_UPDATE_SUCCESS':
                   return {
                         ...state,
-                        previousQuestion: action.question
+                        
                   }
             case 'QUESTION_UPDATE_ERROR':
                   console.log(action.err)
@@ -24,9 +24,11 @@ const questionReducer = (state = initState, action) => {
                   console.log(action)
                   return state;
             case 'QUESTION_FETCH_SUCCESS':
+                  console.log(action)
                   return {
                         ...state,
-                        currentQuestion: action.question
+                        currentQuestion: action.question,
+                        previousQuestion: action.previousQuestion
                   };
             default:
                   return state;

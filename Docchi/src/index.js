@@ -35,7 +35,7 @@ firebase.initializeApp(fbConfig)
 
 firebase.firestore()
 // for testing
-firebase.functions().useFunctionsEmulator('http://localhost:5001')
+// firebase.functions().useFunctionsEmulator('http://localhost:5001')
 firebase.functions()
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk.withExtraArgument(getFirebase))))
 

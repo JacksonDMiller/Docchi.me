@@ -25,8 +25,9 @@ class Home extends Component {
             ...this.props.questions.currentQuestion,
             answer: 'one'
         }
+        // these should not be 2 seperate functinons and its probably effing stuff up.
+        this.props.newQuestion(question)
         this.props.updateQuestion(question)
-        this.props.newQuestion()
     }
 
     chooseAnswerTwo = () => {
@@ -34,13 +35,14 @@ class Home extends Component {
             ...this.props.questions.currentQuestion,
             answer: 'two'
         }
+        this.props.newQuestion(question)
         this.props.updateQuestion(question)
-        this.props.newQuestion()
     }
 
     componentDidMount() {
         this.updateWindowDimensions();
         window.addEventListener('resize', this.updateWindowDimensions);
+        this.props.newQuestion();
     }
 
     componentWillUnmount() {
@@ -63,7 +65,7 @@ class Home extends Component {
             return (
                 <div className='container'>
                     <div className='row'>
-                        <h2 className='col s12'>Would you fly?</h2>
+                        <h2 className='col s12'>Would you rather?</h2>
                         <div className='row col s12'>
                             <button className='col s12 m5 btn-large' onClick={this.chooseAnswerOne}>{questions.currentQuestion.questionOne}</button>
                             <h1 className='col s12 m2 noWhiteSpace'>or</h1>
@@ -83,7 +85,6 @@ class Home extends Component {
             )
         }
         else {
-            this.props.newQuestion()
             return (<h1> Loading... </h1>)
         }
 
@@ -102,7 +103,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         updateQuestion: (question) => dispatch(updateQuestion(question)),
-        newQuestion: () => dispatch(newQuestion())
+        newQuestion: (question) => dispatch(newQuestion(question))
     }
 }
 

@@ -47,7 +47,7 @@ class CreateQuestion extends Component {
         <h1>Would you rather</h1>
         <form id='createQuestionFrom' onSubmit={this.onSubmit}>
           <input
-            class='createQuestionInput'
+            className='createQuestionInput'
             value={this.state.questionOne}
             name="questionOne"
             onChange={this.onChange}
@@ -56,7 +56,7 @@ class CreateQuestion extends Component {
           />
           <h1>or</h1>
           <input
-            class='createQuestionInput'
+            className='createQuestionInput'
             value={this.state.questionTwo}
             name="questionTwo"
             onChange={this.onChange}

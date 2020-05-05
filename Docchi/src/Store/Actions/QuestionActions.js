@@ -128,42 +128,41 @@ export const updateQuestion = (question) => {
 }
 
 
+export const newQuestion = (previousQuestion) => {
 
-
-
-
-export const newQuestion = () => {
-
-  return (dispatch, getState, getFirebase) => {
+  return async (dispatch, getState, getFirebase) => {
     const firebase = getFirebase()
     const firestore = getFirebase().firestore()
     var question = ''
-    const chars =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let autoId = '';
-    for (let i = 0; i < 20; i++) {
-      autoId += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    let questionRef = firestore.collection("questions")
-    questionRef.where(firebase.firestore.FieldPath.documentId(), '>=', autoId)
-      .limit(1).get().then(async doc => {
-        if (doc.docs[0]) {
-          question = { ...doc.docs[0].data(), id: doc.docs[0].id }
-        }
-        else {
-          await questionRef.where(firebase.firestore.FieldPath.documentId(), '<=', 'SH1kHVoSVJSowzLxx73J')
-            .limit(1).get().then(doc => {
-              question = { ...doc.docs[0].data(), id: doc.docs[0].id }
-            })
-        }
-      }).then(() => {
 
-        dispatch({ type: 'QUESTION_FETCH_SUCCESS', question });
-      })
-      .catch((err) => {
-        console.log(err, 'catch error')
-        dispatch({ type: 'QUESTION_FETCH_ERROR', err });
-      });
+    function getQuestion() {
+      var previousQuestionId = ''
+      const chars =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let autoId = '';
+      for (let i = 0; i < 20; i++) {
+        autoId += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      let questionRef = firestore.collection("questions")
+      questionRef.where(firebase.firestore.FieldPath.documentId(), '>=', autoId)
+        .limit(1).get().then(async doc => {
+          if (doc.docs[0]) {
+            if (previousQuestion) {
+              var previousQuestionId = previousQuestion.id
+
+            }
+            if (previousQuestionId === doc.docs[0].id) {
+              getQuestion();
+            }
+            else {
+              question = { ...doc.docs[0].data(), id: doc.docs[0].id }
+              dispatch({ type: 'QUESTION_FETCH_SUCCESS', question, previousQuestion });
+            }
+          }
+        }
+        )
+    }
+    getQuestion()
   }
 
 }
