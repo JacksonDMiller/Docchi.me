@@ -7,8 +7,8 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 
 class CreateQuestion extends Component {
   state = {
-    questionOne: '',
-    questionTwo: '',
+    answerOne: '',
+    answerTwo: '',
     responseOne: 0,
     responseTwo: 0,
     maleResOne: 0,
@@ -23,7 +23,7 @@ class CreateQuestion extends Component {
   };
 
   onSubmit = event => {
-    if (this.state.questionOne === null || this.state.questionTwo === null || this.state.questionOne === '' || this.state.questionTwo === '') {
+    if (this.state.answerOne === null || this.state.answerTwo === null || this.state.answerOne === '' || this.state.answerTwo === '') {
       event.preventDefault();
       M.toast({ html: 'Please fill out both fields' });
     }
@@ -32,8 +32,8 @@ class CreateQuestion extends Component {
       this.setState({ creator: this.props.profile.userName })
       this.props.createQuestion(this.state);
       this.setState({
-        questionOne: '',
-        questionTwo: ''
+        answerOne: '',
+        answerTwo: ''
       })
     }
   };
@@ -44,27 +44,27 @@ class CreateQuestion extends Component {
 
     return (
       <div className="container">
-        <h1>Would you rather</h1>
+        <h2>Would you rather</h2>
         <form id='createQuestionFrom' onSubmit={this.onSubmit}>
           <input
             className='createQuestionInput'
-            value={this.state.questionOne}
-            name="questionOne"
+            value={this.state.answerOne}
+            name="answerOne"
             onChange={this.onChange}
             type="text"
             placeholder="Option One"
           />
-          <h1>or</h1>
+          <h2>or</h2>
           <input
             className='createQuestionInput'
-            value={this.state.questionTwo}
-            name="questionTwo"
+            value={this.state.answerTwo}
+            name="answerTwo"
             onChange={this.onChange}
             type="text"
             placeholder="Option Two"
           />
-          <h1>?</h1>
-          <button className='btn' type="submit">Submit Question</button>
+          <h2>?</h2>
+          <button className='btn purple darken-1' type="submit">Submit Question</button>
         </form>
       </div>
     )

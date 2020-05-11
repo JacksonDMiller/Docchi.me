@@ -41,7 +41,7 @@ export const createAccountWithGoogle = (newUser) => {
           gender: '',
           userName: resp.user.displayName,
           email: resp.user.email,
-          sats: 100,
+          sats: 300,
           submissions: [],
           achievements: [],
           questionsAnswered: [],
@@ -49,7 +49,7 @@ export const createAccountWithGoogle = (newUser) => {
           conformistCounter: 0,
         }).catch(err => console.log(err));
         dispatch({ type: 'SIGNUP_SUCCESS' });
-        M.toast({ html: 'Thanks for signing up here is 100 sats on us' });
+        M.toast({ html: 'Thanks for signing up here is 300 sats on us' });
       }
       else {
         dispatch({ type: 'LOGIN_SUCCESS' });

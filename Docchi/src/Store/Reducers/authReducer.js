@@ -13,7 +13,6 @@ const initState = {
     
         case 'LOGIN_SUCCESS':
           console.log('login success');
-          console.log(state)
           return {
             ...state,
             authError: null

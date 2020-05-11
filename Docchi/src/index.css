@@ -22,6 +22,9 @@ code {
   .container {
     width: 98% !important;
   }
+  h2 {
+    font-size: 3rem !important;
+  }
 }
 
 .createQuestionInput {

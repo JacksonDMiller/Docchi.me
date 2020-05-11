@@ -67,11 +67,11 @@ class Home extends Component {
                     <div className='row'>
                         <h2 className='col s12'>Would you rather?</h2>
                         <div className='row col s12'>
-                            <button className='col s12 m5 btn-large' onClick={this.chooseAnswerOne}>{questions.currentQuestion.questionOne}</button>
-                            <h1 className='col s12 m2 noWhiteSpace'>or</h1>
-                            <button className='col s12 m5 btn-large' onClick={this.chooseAnswerTwo}>{questions.currentQuestion.questionTwo}</button>
+                            <button className='red col s12 l5 btn-large waves-effect waves-light' onClick={this.chooseAnswerOne}>{questions.currentQuestion.answerOne}</button>
+                            <h2 className='col s12 l2 noWhiteSpace'>or</h2>
+                            <button className='blue col s12 l5 btn-large waves-effect waves-light' onClick={this.chooseAnswerTwo}>{questions.currentQuestion.answerTwo}</button>
                         </div>
-                        <h1 className='col s12 noWhiteSpace'>?</h1>
+                        <h2 className='col s12 noWhiteSpace'>?</h2>
                     </div>
 
                     {this.addSwitch(this.state.width)}

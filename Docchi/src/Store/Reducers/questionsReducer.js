@@ -21,10 +21,8 @@ const questionReducer = (state = initState, action) => {
                         state,
                   }
             case 'QUESTION_FETCH_ERROR':
-                  console.log(action)
                   return state;
             case 'QUESTION_FETCH_SUCCESS':
-                  console.log(action)
                   return {
                         ...state,
                         currentQuestion: action.question,

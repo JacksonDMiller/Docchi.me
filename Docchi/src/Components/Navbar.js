@@ -20,8 +20,8 @@ class Navbar extends Component {
         return (
             <div>
                 <nav>
-                    <div className="nav-wrapper">
-                        <a href="/" className="brand-logo">Docchi</a>
+                    <div className="nav-wrapper purple darken-1">
+                        <a href="/" className="brand-logo center">Docchi</a>
                         <a href="#!" data-target="slide-out" className="sidenav-trigger"><i className="material-icons">menu</i></a>
                         {!this.props.auth.uid ?
                             <ul id="nav-mobile" className="right hide-on-med-and-down">
@@ -42,14 +42,13 @@ class Navbar extends Component {
                     {!this.props.auth.uid ?
                         <ul>
                             <li className="sidenav-close"><Link to='/'>Play</Link></li>
-                            <li className="sidenav-close"><Link to='/createaccount'>Sign up</Link></li>
                             <li className="sidenav-close">  <a href='#!' onClick={this.props.createAccountWithGoogle}>Sign in</a></li>
 
                         </ul> :
                         <ul>
+                            <li className="sidenav-close purple darken-2"> <Link className='white-text' to='/'>Docchi</Link></li>
                             <li className="sidenav-close"> <Link to='/profile'>{profile.userName}</Link></li>
-                            <li className="sidenav-close"> <Link to='/'>Play</Link></li>
-                            <li className="sidenav-close"> <Link to='/createquestion'>Create Question</Link></li>
+                            <li className="sidenav-close"> <Link to='/createquestion'>Create a Question</Link></li>
                             <li className="sidenav-close"> <a href='/' onClick={this.props.signOut}>Log Out</a></li>
                         </ul>}
                 </ul>

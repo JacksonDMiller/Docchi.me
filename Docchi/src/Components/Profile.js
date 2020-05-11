@@ -7,19 +7,22 @@ import { updateAccount } from '../Store/Actions/AuthActions'
 
 
 
+
 class Profile extends Component {
 
     state = {
         gender: '',
+        invoice: '',
     }
 
     onChange = event => {
         this.setState({ [event.target.name]: event.target.value });
+        this.props.updateAccount({ gender: event.target.value });
     };
 
     onSubmit = event => {
         event.preventDefault();
-        this.props.updateAccount(this.state);
+
     };
 
     componentDidMount() {
@@ -28,7 +31,7 @@ class Profile extends Component {
     }
 
     handleClick = event => {
-        var invoiceToSend = document.querySelectorAll('.textArea')[0].value
+        var invoiceToSend = this.state.invoice;
         const payInvoice = getFirebase().functions().httpsCallable('payInvoice')
 
         payInvoice({ invoice: invoiceToSend }).then((result) => {
@@ -42,9 +45,9 @@ class Profile extends Component {
             this.sub = profile.submissions.map((item, key) => {
                 if (questions[item]) {
                     return (<li key={item}>
-                        <p className='col s4 card-panel teal lighten-2'>{questions[item].questionOne} </p>
-                        <p className='col s4 card-panel teal lighten-2' >{questions[item].questionTwo}</p>
-                        <p className='col s4 card-panel teal lighten-2'>{questions[item].status ? questions[item].status : 'Pending...'}</p>
+                        <p className='col s5 card-panel purple lighten-1'>{questions[item].answerOne} </p>
+                        <p className='col s5 card-panel purple lighten-1' >{questions[item].answerTwo}</p>
+                        <p className='col s2 card-panel purple lighten-1'>{questions[item].status ? questions[item].status : 'Pending...'}</p>
                     </li>)
                 }
                 else { return (null) }
@@ -54,7 +57,7 @@ class Profile extends Component {
         return (
             <div>
                 <div className='container'>
-                    <h1>{profile.userName}</h1>
+                    <h2>{profile.userName}</h2>
                     {profile.gender === '' ?
                         <form onSubmit={this.onSubmit} action="" className="">
                             <h4>Please select your gender to continue.</h4>
@@ -82,43 +85,44 @@ class Profile extends Component {
                                     <span>Female</span>
                                 </label>
                             </p>
-                            <button className="btn" type="submit" name="action">Submit</button>
                         </form>
 
                         : <h6>Gender: {profile.gender}</h6>}
 
                     <h6> Sats Earned: {profile.sats} </h6>
-                    <button data-target="modal1" className="btn modal-trigger">Withdraw</button>
+                    <button data-target="modal1" className="purple darken-1 btn modal-trigger">Withdraw</button>
                     <h4>Achievements</h4>
 
 
                     {profile.isEmpty === false ?
-                        <ul className="row">
+                        <ul className="row white-text">
                             <li>
-                                <p className='col s9 m8 card-panel teal lighten-2'>Answer your first question</p>
-                                <p className='col s2 card-panel teal lighten-2 hide-on-small-only'>100 sats</p>
-                                {profile.achievements.includes('Answer your first question') ? <p className='col s3 m2 card-panel teal lighten-2'> Complete</p> : <p className='col s3 m2 card-panel teal lighten-2'> Incomplete</p>}
+                                <p className='col s9 m8 card-panel purple lighten-1'>Answer your first question</p>
+                                <p className='col s2 card-panel purple lighten-1 hide-on-small-only'>300 sats</p>
+                                {profile.achievements.includes('Answer your first question') ? <p className='col s3 m2 card-panel purple lighten-1'> Complete</p> : <p className='col s3 m2 card-panel purple lighten-1'> Incomplete</p>}
 
                             </li>
                             <li>
-                                <p className='col s9 m8 card-panel teal lighten-2'>Submit your first question</p>
-                                <p className='col s2 card-panel teal lighten-2 hide-on-small-only'>100 sats</p>
-                                {profile.achievements.includes('Submit your first question') ? <p className='col s3 m2 card-panel teal lighten-2'> Complete</p> : <p className='col s3 m2 card-panel teal lighten-2'> Incomplete</p>}
+                                <p className='col s9 m8 card-panel purple lighten-1'>Submit your first question</p>
+                                <p className='col s2 card-panel purple lighten-1 hide-on-small-only'>300 sats</p>
+                                {profile.achievements.includes('Submit your first question') ? <p className='col s3 m2 card-panel purple lighten-1'> Complete</p> : <p className='col s3 m2 card-panel purple lighten-1'> Incomplete</p>}
                             </li>
                             <li>
-                                <p className='col s9 m8 card-panel teal lighten-2'>Renegade: Disagree with the majority 5 times</p>
-                                <p className='col s2 card-panel teal lighten-2 hide-on-small-only'>100 sats</p>
-                                {profile.achievements.includes('Renegade: Answer 5 questions against the majority') ? <p className='col s3 m2 card-panel teal lighten-2'> Complete</p> : <p className='col s3 m2 card-panel teal lighten-2'>Incomplete</p>}
+                                <p className=' truncate col s9 m8 card-panel purple lighten-1'>Renegade: Disagree with the majority 5 times</p>
+                                <p className='col s2 card-panel purple lighten-1 hide-on-small-only'>300 sats</p>
+                                {profile.achievements.includes('Renegade: Answer 5 questions against the majority') ? <p className='col s3 m2 card-panel purple lighten-1'> Complete</p> : <p className='col s3 m2 card-panel purple lighten-1'>Incomplete</p>}
                             </li>
                             <li>
-                                <p className='col s9 m8 card-panel teal lighten-2'>Conformist: Agree with the majority 5 times</p>
-                                <p className='col s2 card-panel teal lighten-2 hide-on-small-only'>100 sats</p>
-                                {profile.achievements.includes('Conformist: Answer 5 questions in agreement with the majority') ? <p className='col s3 m2 card-panel teal lighten-2'> Complete</p> : <p className='col s3 m2 card-panel teal lighten-2'> Incomplete</p>}
+                                <p className='truncate col s9 m8 card-panel purple lighten-1'>Conformist: Agree with the majority 5 times</p>
+                                <p className='col s2 card-panel purple lighten-1 hide-on-small-only'>300 sats</p>
+                                {profile.achievements.includes('Conformist: Answer 5 questions in agreement with the majority') ? <p className='col s3 m2 card-panel purple lighten-1'> Complete</p> : <p className='col s3 m2 card-panel purple lighten-1'> Incomplete</p>}
                             </li>
                         </ul>
                         : <h4>loading...</h4>}
-                    <h4>Pending Submissions</h4>
-                    {this.sub === undefined || this.sub.length === 0 ? <span>Nothing here yet. Submit a question.</span> : <ul className="row">{this.sub}</ul>}
+                    <div className='hide-on-small-only'>
+                        <h4>Pending Submissions</h4>
+                        {this.sub === undefined || this.sub.length === 0 ? <span>Nothing here yet. Submit a question.</span> : <ul className="row white-text">{this.sub}</ul>}
+                    </div>
                 </div>
 
                 {/* Modal */}
@@ -127,7 +131,7 @@ class Profile extends Component {
                         <div className="modal-content">
                             <h4>Please enter a lighting invoice</h4>
 
-                            <textarea className='textArea materialize-textarea'> </textarea>
+                            <textarea onChange={this.onChange} defaultValue={this.state.invoice} name="invoice" className='materialize-textarea'></textarea>
                         </div>
 
                         <div className="modal-footer">

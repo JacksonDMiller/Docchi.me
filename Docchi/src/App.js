@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import Home from './Components/Home'
-import CreateAccount from './Components/CreateAccount';
 import SignIn from './Components/SignIn';
 import SignOut from './Components/SignOut';
 import CreateQuestion from './Components/CreateQuestion'
@@ -18,7 +17,7 @@ function App() {
       <Navbar />
       <Switch>
       <Route exact path='/' component={Home} />
-      <Route path='/createaccount' component={CreateAccount} />
+      <Route path='/home' component={Home} />
       <Route path='/signin' component={SignIn} />
       <Route path='/signout' component={SignOut} />
       <Route path='/createquestion' component={CreateQuestion} />

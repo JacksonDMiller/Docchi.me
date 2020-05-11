@@ -66,7 +66,7 @@ exports.addAchievement = functions.https.onCall(async (data, context) => {
         const docData = doc.data()
         if (!docData.achievements.includes(data.achievement)) {
             db.collection('users').doc(context.auth.uid).update({
-                sats: docData.sats + 100,
+                sats: docData.sats + 300,
                 achievements: admin.firestore.FieldValue.arrayUnion(data.achievement)
             })
         }

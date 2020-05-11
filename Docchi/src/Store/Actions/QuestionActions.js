@@ -95,7 +95,6 @@ export const updateQuestion = (question) => {
           renegadeCounter = getState().firebase.profile.renegadeCounter + 1
           if (renegadeCounter === 5) {
             addAchievement({ achievement: 'Renegade: Answer 5 questions against the majority' }).then(result => {
-              console.log(result)
               if (result.data !== 'error') {
                 M.toast({ html: 'Renegade: Answered 5 questions against the majority' })
               }
@@ -136,7 +135,6 @@ export const newQuestion = (previousQuestion) => {
     var question = ''
 
     function getQuestion() {
-      var previousQuestionId = ''
       const chars =
         'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
       let autoId = '';
