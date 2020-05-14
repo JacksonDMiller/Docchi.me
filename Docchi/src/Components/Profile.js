@@ -27,7 +27,9 @@ class Profile extends Component {
 
     componentDidMount() {
         var elems = document.querySelectorAll('.modal');
+        var tabElems = document.querySelectorAll('.tabs');
         M.Modal.init(elems, null);
+        M.Tabs.init(tabElems, {swipeable: true});
     }
 
     handleClick = event => {
@@ -39,7 +41,10 @@ class Profile extends Component {
         })
     }
 
+
     render() {
+
+
         const { profile, questions } = this.props
         if (profile.submissions) {
             this.sub = profile.submissions.map((item, key) => {
@@ -57,6 +62,7 @@ class Profile extends Component {
         return (
             <div>
                 <div className='container'>
+
                     <h2>{profile.userName}</h2>
                     {profile.gender === '' ?
                         <form onSubmit={this.onSubmit} action="" className="">
@@ -91,38 +97,53 @@ class Profile extends Component {
 
                     <h6> Sats Earned: {profile.sats} </h6>
                     <button data-target="modal1" className="purple darken-1 btn modal-trigger">Withdraw</button>
-                    <h4>Achievements</h4>
 
+                    <div className="row">
+                        <div className="col s12">
+                            <ul className="tabs">
+                                <li className="tab col s3"><a href="#Achievements">Achievements</a></li>
+                                <li className="tab col s3"><a className="" href="#Submissions">Submissions</a></li>
+                            </ul>
+                        </div>
+                        <div id="Achievements" className="col s12">
 
-                    {profile.isEmpty === false ?
-                        <ul className="row white-text">
-                            <li>
-                                <p className='col s9 m8 card-panel purple lighten-1'>Answer your first question</p>
-                                <p className='col s2 card-panel purple lighten-1 hide-on-small-only'>300 sats</p>
-                                {profile.achievements.includes('Answer your first question') ? <p className='col s3 m2 card-panel purple lighten-1'> Complete</p> : <p className='col s3 m2 card-panel purple lighten-1'> Incomplete</p>}
+                            {profile.isEmpty === false ?
+                                <ul className="row white-text">
+                                    <li>
+                                        <p className='col s9 m8 card-panel purple lighten-1'>Answer your first question</p>
+                                        <p className='col s2 card-panel purple lighten-1 hide-on-small-only'>300 sats</p>
+                                        {profile.achievements.includes('Answer your first question') ? <p className='col s3 m2 card-panel purple lighten-1'> Complete</p> : <p className='col s3 m2 card-panel purple lighten-1'> Incomplete</p>}
 
-                            </li>
-                            <li>
-                                <p className='col s9 m8 card-panel purple lighten-1'>Submit your first question</p>
-                                <p className='col s2 card-panel purple lighten-1 hide-on-small-only'>300 sats</p>
-                                {profile.achievements.includes('Submit your first question') ? <p className='col s3 m2 card-panel purple lighten-1'> Complete</p> : <p className='col s3 m2 card-panel purple lighten-1'> Incomplete</p>}
-                            </li>
-                            <li>
-                                <p className=' truncate col s9 m8 card-panel purple lighten-1'>Renegade: Disagree with the majority 5 times</p>
-                                <p className='col s2 card-panel purple lighten-1 hide-on-small-only'>300 sats</p>
-                                {profile.achievements.includes('Renegade: Answer 5 questions against the majority') ? <p className='col s3 m2 card-panel purple lighten-1'> Complete</p> : <p className='col s3 m2 card-panel purple lighten-1'>Incomplete</p>}
-                            </li>
-                            <li>
-                                <p className='truncate col s9 m8 card-panel purple lighten-1'>Conformist: Agree with the majority 5 times</p>
-                                <p className='col s2 card-panel purple lighten-1 hide-on-small-only'>300 sats</p>
-                                {profile.achievements.includes('Conformist: Answer 5 questions in agreement with the majority') ? <p className='col s3 m2 card-panel purple lighten-1'> Complete</p> : <p className='col s3 m2 card-panel purple lighten-1'> Incomplete</p>}
-                            </li>
-                        </ul>
-                        : <h4>loading...</h4>}
-                    <div className='hide-on-small-only'>
-                        <h4>Pending Submissions</h4>
-                        {this.sub === undefined || this.sub.length === 0 ? <span>Nothing here yet. Submit a question.</span> : <ul className="row white-text">{this.sub}</ul>}
+                                    </li>
+                                    <li>
+                                        <p className='col s9 m8 card-panel purple lighten-1'>Submit your first question</p>
+                                        <p className='col s2 card-panel purple lighten-1 hide-on-small-only'>300 sats</p>
+                                        {profile.achievements.includes('Submit your first question') ? <p className='col s3 m2 card-panel purple lighten-1'> Complete</p> : <p className='col s3 m2 card-panel purple lighten-1'> Incomplete</p>}
+                                    </li>
+                                    <li>
+                                        <p className=' truncate col s9 m8 card-panel purple lighten-1'>Renegade: Disagree with the majority 5 times</p>
+                                        <p className='col s2 card-panel purple lighten-1 hide-on-small-only'>300 sats</p>
+                                        {profile.achievements.includes('Renegade: Answer 5 questions against the majority') ? <p className='col s3 m2 card-panel purple lighten-1'> Complete</p> : <p className='col s3 m2 card-panel purple lighten-1'>Incomplete</p>}
+                                    </li>
+                                    <li>
+                                        <p className='truncate col s9 m8 card-panel purple lighten-1'>Conformist: Agree with the majority 5 times</p>
+                                        <p className='col s2 card-panel purple lighten-1 hide-on-small-only'>300 sats</p>
+                                        {profile.achievements.includes('Conformist: Answer 5 questions in agreement with the majority') ? <p className='col s3 m2 card-panel purple lighten-1'> Complete</p> : <p className='col s3 m2 card-panel purple lighten-1'> Incomplete</p>}
+                                    </li>
+                                </ul>
+                                : <h4>loading...</h4>}
+
+                        </div>
+                        <div id="Submissions" className="col s12">
+                            <div className=''>
+                                {this.sub === undefined || this.sub.length === 0 ? <span>Nothing here yet. Submit a question.</span> : <ul className="row white-text">{this.sub}</ul>}
+                            </div>
+                        </div>
                     </div>
+
+
+
+
                 </div>
 
                 {/* Modal */}
