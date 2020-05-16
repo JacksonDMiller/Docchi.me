@@ -5,6 +5,8 @@ import { compose } from 'redux'
 import { updateQuestion, newQuestion } from '../Store/Actions/QuestionActions'
 import Results from './Results'
 import { Redirect } from 'react-router-dom'
+import M from 'materialize-css/dist/js/materialize.min.js';
+import Modal from './Modal'
 
 class Home extends Component {
 
@@ -16,7 +18,6 @@ class Home extends Component {
             case (width < 500): return <iframe title='aAds-small' className='aAds-small' data-aa="1373080" src="//ad.a-ads.com/1373080?size=320x50" scrolling="no" allowtransparency="true"></iframe>;
             case width < 860: return <iframe title='aAds-med' className='aAds-med' data-aa="1373078" src="//ad.a-ads.com/1373078?size=468x60" scrolling="no" allowtransparency="true"></iframe>;
             default: return <iframe title='aAds-big' className="aAds-big" data-aa="1373068" src="//ad.a-ads.com/1373068?size=728x90" scrolling="no" allowtransparency="true" ></iframe >;
-
         }
     }
 
@@ -37,12 +38,16 @@ class Home extends Component {
         }
         this.props.newQuestion(question)
         this.props.updateQuestion(question)
+
     }
+
+
 
     componentDidMount() {
         this.updateWindowDimensions();
         window.addEventListener('resize', this.updateWindowDimensions);
         this.props.newQuestion();
+        
     }
 
     componentWillUnmount() {
@@ -54,6 +59,7 @@ class Home extends Component {
     }
 
     render() {
+
         const { questions, previousQuestion, profile } = this.props;
 
         if (profile.gender === '') {
@@ -61,24 +67,25 @@ class Home extends Component {
         }
 
 
+
         if (questions.currentQuestion) {
             return (
                 <div className='container'>
                     <div className='row'>
-                        <h2 className='col s12'>Would you rather?</h2>
+                        <h2 className='col s12'>Would you rather</h2>
                         <div className='row col s12'>
-                            <button className='red col s12 l5 btn-large waves-effect waves-light' onClick={this.chooseAnswerOne}>{questions.currentQuestion.answerOne}</button>
-                            <h2 className='col s12 l2 noWhiteSpace'>or</h2>
-                            <button className='blue col s12 l5 btn-large waves-effect waves-light' onClick={this.chooseAnswerTwo}>{questions.currentQuestion.answerTwo}</button>
+                            <button data-target="modal1" className='red col s12  btn-large waves-effect waves-light modal-trigger' onClick={this.chooseAnswerOne}>{questions.currentQuestion.answerOne}</button>
+                            <h2 className='col s12  noWhiteSpace'>or</h2>
+                            <button data-target="modal1" className=' modal-trigger blue col s12 btn-large waves-effect waves-light ' onClick={this.chooseAnswerTwo}>{questions.currentQuestion.answerTwo}</button>
                         </div>
                         <h2 className='col s12 noWhiteSpace'>?</h2>
                     </div>
 
                     {this.addSwitch(this.state.width)}
-                    {/* {this.state.width > 860 ? <iframe title='aAds-big' className="aAds-big" data-aa="1373068" src="//ad.a-ads.com/1373068?size=728x90" scrolling="no" allowtransparency="true"></iframe>
-                        : <iframe className='aAds-small' data-aa="1373080" src="//ad.a-ads.com/1373080?size=320x50" scrolling="no" allowtransparency="true"></iframe>} */}
 
-                    {previousQuestion ? <Results /> : null}
+{previousQuestion ? <Modal/> : null }
+                  
+
 
 
                 </div>

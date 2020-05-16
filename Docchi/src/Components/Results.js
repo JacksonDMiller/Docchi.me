@@ -37,6 +37,7 @@ const Results = (props) => {
     }
     return (
         <div className="container row">
+            
             <p className="col s12 flow-text">You would rather {props.previousQuestion.answer === 'one' ? props.previousQuestion.answerOne : props.previousQuestion.answerTwo} than {props.previousQuestion.answer === 'one' ? props.previousQuestion.answerTwo : props.previousQuestion.answerOne}. </p>
             <p className="col s12 flow-text">See who agreed with you!</p>
             <div className="col s12 row result-box-container">

@@ -150,6 +150,7 @@ export const newQuestion = (previousQuestion) => {
 
             }
             if (previousQuestionId === doc.docs[0].id) {
+              console.log('trying again')
               getQuestion();
             }
             else {

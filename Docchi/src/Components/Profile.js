@@ -29,7 +29,7 @@ class Profile extends Component {
         var elems = document.querySelectorAll('.modal');
         var tabElems = document.querySelectorAll('.tabs');
         M.Modal.init(elems, null);
-        M.Tabs.init(tabElems, {swipeable: true});
+        M.Tabs.init(tabElems, { swipeable: true });
     }
 
     handleClick = event => {
@@ -49,11 +49,14 @@ class Profile extends Component {
         if (profile.submissions) {
             this.sub = profile.submissions.map((item, key) => {
                 if (questions[item]) {
-                    return (<li key={item}>
-                        <p className='col s5 card-panel purple lighten-1'>{questions[item].answerOne} </p>
-                        <p className='col s5 card-panel purple lighten-1' >{questions[item].answerTwo}</p>
-                        <p className='col s2 card-panel purple lighten-1'>{questions[item].status ? questions[item].status : 'Pending...'}</p>
-                    </li>)
+                    return (<li key={item} className="collection-item avatar">
+                        <i className="material-icons circle">change_history</i>
+                        <span className="title">Would you rather...</span>
+                        <p>{questions[item].answerOne} or {questions[item].answerTwo}</p>
+                        {questions[item].status === 'Pending' ? <p className='red-text'>Pending</p> : <p className='green-text'>Approved</p>}
+                    </li>
+
+                    )
                 }
                 else { return (null) }
             }
@@ -62,73 +65,78 @@ class Profile extends Component {
         return (
             <div>
                 <div className='container'>
+                    <div className='blue lighten-2 row nameTag'>
+                        <h2 className='col s12 left-align'>{profile.userName}</h2>
+                        {profile.gender === '' ?
+                            <form onSubmit={this.onSubmit} action="" className="row">
+                                <h6>Please select your gender to continue.</h6>
+                                <p className='col s6'>
+                                    <label>
+                                        <input
+                                            onChange={this.onChange}
+                                            type="radio"
+                                            name="gender"
+                                            value="Male"
+                                            className="form-check-input"
+                                        />
+                                        <span className='black-text'>Male</span>
+                                    </label>
+                                </p>
+                                <p className='col s6'>
+                                    <label>
+                                        <input
+                                            onChange={this.onChange}
+                                            type="radio"
+                                            name="gender"
+                                            value="Female"
+                                            className="form-check-input"
+                                        />
+                                        <span className='black-text'>Female</span>
+                                    </label>
+                                </p>
+                            </form>
 
-                    <h2>{profile.userName}</h2>
-                    {profile.gender === '' ?
-                        <form onSubmit={this.onSubmit} action="" className="">
-                            <h4>Please select your gender to continue.</h4>
-                            <p>
-                                <label>
-                                    <input
-                                        onChange={this.onChange}
-                                        type="radio"
-                                        name="gender"
-                                        value="Male"
-                                        className="form-check-input"
-                                    />
-                                    <span>Male</span>
-                                </label>
-                            </p>
-                            <p>
-                                <label>
-                                    <input
-                                        onChange={this.onChange}
-                                        type="radio"
-                                        name="gender"
-                                        value="Female"
-                                        className="form-check-input"
-                                    />
-                                    <span>Female</span>
-                                </label>
-                            </p>
-                        </form>
-
-                        : <h6>Gender: {profile.gender}</h6>}
-
-                    <h6> Sats Earned: {profile.sats} </h6>
-                    <button data-target="modal1" className="purple darken-1 btn modal-trigger">Withdraw</button>
+                            : <div><h6 className='col s3 left-align grey-text'>Gender:</h6> <h6 className='col s9 left-align'>{profile.gender}</h6></div>}
+                        <h6 className='input-field col s3 left-align grey-text'>Sats Earned:</h6><h6 className='input-field col s3 left-align'>{profile.sats} </h6>
+                        <button data-target="modal1" className="left-align input-field col s3 indigo darken-3 btn modal-trigger">Withdraw</button>
+                    </div>
 
                     <div className="row">
                         <div className="col s12">
                             <ul className="tabs">
-                                <li className="tab col s3"><a href="#Achievements">Achievements</a></li>
-                                <li className="tab col s3"><a className="" href="#Submissions">Submissions</a></li>
+                                <li className="tab col s3"><a className='black-text' href="#Achievements">Achievements</a></li>
+                                <li className="tab col s3"><a className="black-text" href="#Submissions">Submissions</a></li>
                             </ul>
                         </div>
                         <div id="Achievements" className="col s12">
 
                             {profile.isEmpty === false ?
-                                <ul className="row white-text">
-                                    <li>
-                                        <p className='col s9 m8 card-panel purple lighten-1'>Answer your first question</p>
-                                        <p className='col s2 card-panel purple lighten-1 hide-on-small-only'>300 sats</p>
-                                        {profile.achievements.includes('Answer your first question') ? <p className='col s3 m2 card-panel purple lighten-1'> Complete</p> : <p className='col s3 m2 card-panel purple lighten-1'> Incomplete</p>}
+                                <ul className="collection left-align">
+                                    <li className="collection-item avatar">
+                                        <i className="material-icons circle">change_history</i>
+                                        <span className="title">Answer your first question</span>
+                                        <p>Earn 300 sats </p>
+                                        {profile.achievements.includes('Answer your first question') ? <p className='green-text'>Completed</p> : <p className='red-text'>Incomplete</p>}
+
 
                                     </li>
-                                    <li>
-                                        <p className='col s9 m8 card-panel purple lighten-1'>Submit your first question</p>
-                                        <p className='col s2 card-panel purple lighten-1 hide-on-small-only'>300 sats</p>
-                                        {profile.achievements.includes('Submit your first question') ? <p className='col s3 m2 card-panel purple lighten-1'> Complete</p> : <p className='col s3 m2 card-panel purple lighten-1'> Incomplete</p>}
+                                    <li className="collection-item avatar">
+                                        <i className="material-icons circle">change_history</i>
+                                        <span className="title">Submit your first question</span>
+                                        <p>Earn 300 sats </p>
+                                        {profile.achievements.includes('Submit your first question') ? <p className='green-text'>Completed</p> : <p className='red-text'>Incomplete</p>}
                                     </li>
-                                    <li>
-                                        <p className=' truncate col s9 m8 card-panel purple lighten-1'>Renegade: Disagree with the majority 5 times</p>
-                                        <p className='col s2 card-panel purple lighten-1 hide-on-small-only'>300 sats</p>
-                                        {profile.achievements.includes('Renegade: Answer 5 questions against the majority') ? <p className='col s3 m2 card-panel purple lighten-1'> Complete</p> : <p className='col s3 m2 card-panel purple lighten-1'>Incomplete</p>}
+                                    <li className="collection-item avatar">
+                                        <i className="material-icons circle">change_history</i>
+                                        <span className="title">Renegade: Answer 5 questions against the majority</span>
+                                        <p>Earn 300 sats </p>
+                                        {profile.achievements.includes('Renegade: Answer 5 questions against the majority') ? <p className='green-text'>Completed</p> : <p className='red-text'>Incomplete</p>}
                                     </li>
-                                    <li>
-                                        <p className='truncate col s9 m8 card-panel purple lighten-1'>Conformist: Agree with the majority 5 times</p>
-                                        <p className='col s2 card-panel purple lighten-1 hide-on-small-only'>300 sats</p>
-                                        {profile.achievements.includes('Conformist: Answer 5 questions in agreement with the majority') ? <p className='col s3 m2 card-panel purple lighten-1'> Complete</p> : <p className='col s3 m2 card-panel purple lighten-1'> Incomplete</p>}
+                                    <li className="collection-item avatar">
+                                        <i className="material-icons circle">change_history</i>
+                                        <span className="title">Conformist: Answer 5 questions in agreement with the majority</span>
+                                        <p>Earn 300 sats </p>
+                                        {profile.achievements.includes('Conformist: Answer 5 questions in agreement with the majority') ? <p className='green-text'>Completed</p> : <p className='red-text'>Incomplete</p>}
                                     </li>
                                 </ul>
                                 : <h4>loading...</h4>}
@@ -136,7 +144,7 @@ class Profile extends Component {
                         </div>
                         <div id="Submissions" className="col s12">
                             <div className=''>
-                                {this.sub === undefined || this.sub.length === 0 ? <span>Nothing here yet. Submit a question.</span> : <ul className="row white-text">{this.sub}</ul>}
+                                {this.sub === undefined || this.sub.length === 0 ? <span>Nothing here yet. Submit a question.</span> : <ul className="collection left-align">{this.sub}</ul>}
                             </div>
                         </div>
                     </div>
