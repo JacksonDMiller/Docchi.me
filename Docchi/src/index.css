@@ -112,3 +112,7 @@ code {
 .yuiLighterBlue {
   background-color: #cae5e9ff !important;
 }
+
+.invoiceInput {
+  height: 10rem !important;
+}

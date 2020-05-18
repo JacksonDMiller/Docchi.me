@@ -159,10 +159,10 @@ class Profile extends Component {
                 {/* Modal */}
                 <div id="modal1" className="modal">
                     <form action="">
-                        <div className="modal-content">
+                        <div className="modal-content input-field">
                             <h4>Please enter a lighting invoice</h4>
 
-                            <textarea onChange={this.onChangeInvoice} defaultValue={this.state.invoice} name="invoice" className='materialize-textarea'></textarea>
+                            <textarea onChange={this.onChangeInvoice} defaultValue={this.state.invoice} name="invoice" className='materialize-textarea invoiceInput'></textarea>
                         </div>
 
                         <div className="modal-footer">
