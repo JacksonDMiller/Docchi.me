@@ -129,7 +129,9 @@ export const updateQuestion = (question) => {
 
 export const newQuestion = (previousQuestion) => {
 
+
   return async (dispatch, getState, getFirebase) => {
+    dispatch({ type: 'QUESTION_REQUESTED' });
     const firebase = getFirebase()
     const firestore = getFirebase().firestore()
     var question = ''
@@ -150,7 +152,6 @@ export const newQuestion = (previousQuestion) => {
 
             }
             if (previousQuestionId === doc.docs[0].id) {
-              console.log('trying again')
               getQuestion();
             }
             else {

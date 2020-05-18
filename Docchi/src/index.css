@@ -10,7 +10,7 @@ code {
 }
 
 .result-box-container {
-  display: flex;
+  /* display: flex; */
 }
 
 .noWhiteSpace {
@@ -100,3 +100,15 @@ code {
 }
 
 /*Color of underline*/
+
+.yuiBlue {
+  background-color: #08708aff !important;
+}
+
+.yuiLightBlue {
+  background-color: #56b1bfff !important;
+}
+
+.yuiLighterBlue {
+  background-color: #cae5e9ff !important;
+}

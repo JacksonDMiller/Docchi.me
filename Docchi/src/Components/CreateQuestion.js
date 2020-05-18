@@ -64,7 +64,7 @@ class CreateQuestion extends Component {
             placeholder="Option Two"
           />
           <h2>?</h2>
-          <button className='btn purple darken-1' type="submit">Submit Question</button>
+          <button className='btn yuiLightBlue darken-1' type="submit">Submit Question</button>
         </form>
       </div>
     )

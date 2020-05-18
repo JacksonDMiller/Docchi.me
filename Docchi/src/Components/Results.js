@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import Chart from "react-google-charts";
 
 
 const Results = (props) => {
@@ -37,7 +38,7 @@ const Results = (props) => {
     }
     return (
         <div className="container row">
-            
+
             <p className="col s12 flow-text">You would rather {props.previousQuestion.answer === 'one' ? props.previousQuestion.answerOne : props.previousQuestion.answerTwo} than {props.previousQuestion.answer === 'one' ? props.previousQuestion.answerTwo : props.previousQuestion.answerOne}. </p>
             <p className="col s12 flow-text">See who agreed with you!</p>
             <div className="col s12 row result-box-container">
@@ -50,6 +51,26 @@ const Results = (props) => {
                 <div className="col s4 pink card result-box" >
                     <h4 >{femaleAnswer.toFixed(0)}% of <br /> women</h4>
                 </div>
+
+                <Chart
+                    width={'800px'}
+                    height={'400px'}
+                    chartType="PieChart"
+                    loader={<div>Loading Chart</div>}
+                    data={[['Pac Man', 'Percentage'], ['', 75], ['', 25]]}
+                    options={{
+                        legend: 'none',
+                        pieSliceText: 'none',
+                        pieStartAngle: 135,
+                        tooltip: { trigger: 'none' },
+                        slices: {
+                            0: { color: 'yellow' },
+                            1: { color: 'transparent' },
+                        },
+                    }}
+                    rootProps={{ 'data-testid': '6' }}
+                />
+
             </div>
         </div>
     )

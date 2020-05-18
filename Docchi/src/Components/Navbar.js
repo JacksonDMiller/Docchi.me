@@ -20,7 +20,7 @@ class Navbar extends Component {
         return (
             <div>
                 <nav>
-                    <div className="nav-wrapper indigo darken-3">
+                    <div className="nav-wrapper yuiBlue">
                         <a href="/" className="brand-logo center">Docchi</a>
                         <a href="#!" data-target="slide-out" className="sidenav-trigger"><i className="material-icons">menu</i></a>
                         {!this.props.auth.uid ?
@@ -46,7 +46,7 @@ class Navbar extends Component {
 
                         </ul> :
                         <ul>
-                            <li className="sidenav-close indigo darken-3"> <Link className='white-text' to='/'>Docchi</Link></li>
+                            <li className="sidenav-close yuiBlue"> <Link className='white-text' to='/'>Docchi</Link></li>
                             <li className="sidenav-close"> <Link to='/profile'>{profile.userName}</Link></li>
                             <li className="sidenav-close"> <Link to='/createquestion'>Create a Question</Link></li>
                             <li className="sidenav-close"> <a href='/' onClick={this.props.signOut}>Log Out</a></li>

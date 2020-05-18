@@ -3,9 +3,7 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { updateQuestion, newQuestion } from '../Store/Actions/QuestionActions'
-import Results from './Results'
 import { Redirect } from 'react-router-dom'
-import M from 'materialize-css/dist/js/materialize.min.js';
 import Modal from './Modal'
 
 class Home extends Component {
@@ -76,7 +74,7 @@ class Home extends Component {
                         <div className='row col s12'>
                             <button data-target="modal1" className='red col s12  btn-large waves-effect waves-light modal-trigger' onClick={this.chooseAnswerOne}>{questions.currentQuestion.answerOne}</button>
                             <h2 className='col s12  noWhiteSpace'>or</h2>
-                            <button data-target="modal1" className=' modal-trigger blue col s12 btn-large waves-effect waves-light ' onClick={this.chooseAnswerTwo}>{questions.currentQuestion.answerTwo}</button>
+                            <button data-target="modal1" className=' modal-trigger yuiLightBlue col s12 btn-large waves-effect waves-light ' onClick={this.chooseAnswerTwo}>{questions.currentQuestion.answerTwo}</button>
                         </div>
                         <h2 className='col s12 noWhiteSpace'>?</h2>
                     </div>

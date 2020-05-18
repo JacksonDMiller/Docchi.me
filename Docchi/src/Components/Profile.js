@@ -65,7 +65,7 @@ class Profile extends Component {
         return (
             <div>
                 <div className='container'>
-                    <div className='blue lighten-2 row nameTag'>
+                    <div className='yuiLighterBlue row nameTag'>
                         <h2 className='col s12 left-align'>{profile.userName}</h2>
                         {profile.gender === '' ?
                             <form onSubmit={this.onSubmit} action="" className="row">

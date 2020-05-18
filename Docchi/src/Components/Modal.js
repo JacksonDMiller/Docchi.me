@@ -2,24 +2,14 @@ import React, { Component } from "react";
 import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
 import { connect } from 'react-redux'
+import Chart from "react-google-charts";
 
 class Modal extends Component {
 
 
     componentDidMount() {
         const options = {
-            onOpenStart: () => {
-                console.log("Open Start");
-            },
-            onOpenEnd: () => {
-                console.log("Open End");
-            },
-            onCloseStart: () => {
-                console.log("Close Start");
-            },
-            onCloseEnd: () => {
-                console.log("Close End");
-            },
+
             inDuration: 250,
             outDuration: 250,
             opacity: 0.5,
@@ -29,11 +19,7 @@ class Modal extends Component {
         };
         M.Modal.init(this.Modal, options);
         let instance = M.Modal.getInstance(this.Modal);
-        instance.open();
-        // instance.close();
-        // instance.destroy();
-
-
+        instance.open()
 
 
     }
@@ -62,7 +48,7 @@ class Modal extends Component {
             var femaleTotal = this.props.previousQuestion.femaleResOne + this.props.previousQuestion.femaleResTwo
             var maleTotal = this.props.previousQuestion.maleResOne + this.props.previousQuestion.maleResTwo
             var total = this.props.previousQuestion.responseOne + this.props.previousQuestion.responseTwo
-            answer = denominator / total * 100
+            answer = parseInt((denominator / total * 100).toFixed(0))
             maleAnswer = maleDenominator / maleTotal * 100
             femaleAnswer = femaleDenominator / femaleTotal * 100
             if (isNaN(femaleAnswer)) {
@@ -74,14 +60,8 @@ class Modal extends Component {
         }
 
         return (
-            <div>
-                <a
-                    className="waves-effect waves-light btn modal-trigger"
-                    data-target="modal1"
-                >
-                    Modal
-        </a>
 
+            < div >
                 <div
                     ref={Modal => {
                         this.Modal = Modal;
@@ -89,38 +69,93 @@ class Modal extends Component {
                     id="modal1"
                     className="modal"
                 >
-                    {/* If you want Bottom Sheet Modal then add 
-                        bottom-sheet class to the "modal" div
-                        If you want Fixed Footer Modal then add
-                        modal-fixed-footer to the "modal" div*/}
+
                     <div className="modal-content">
                         <div className="container row">
 
                             <p className="col s12 flow-text">You would rather {this.props.previousQuestion.answer === 'one' ? this.props.previousQuestion.answerOne : this.props.previousQuestion.answerTwo} than {this.props.previousQuestion.answer === 'one' ? this.props.previousQuestion.answerTwo : this.props.previousQuestion.answerOne}. </p>
                             <p className="col s12 flow-text">See who agreed with you!</p>
+
                             <div className="col s12 row result-box-container">
-                                <div className="col s4 purple darken-1 card result-box" >
-                                    <h4 >{answer.toFixed(0)}% of <br /> people</h4>
+                                <div className="row col s12 card result-box valign-wrapper" >
+                                    <span className='col s6 flow-text'>{answer}% of people</span>
+                                    <div className='col s6'>
+                                        <Chart className=''
+                                            height={'8vh'}
+                                            chartType="PieChart"
+                                            loader={<div>Loading Chart</div>}
+                                            data={[['Pac Man', 'Percentage'], ['', answer], ['', 100 - answer]]}
+                                            options={{
+                                                pieStartAngle: 180,
+                                                legend: 'none',
+                                                pieSliceText: 'none',
+                                                tooltip: { trigger: 'none' },
+                                                slices: {
+                                                    0: { color: '#ffab40' },
+                                                    1: { color: 'transparent' },
+                                                },
+                                            }}
+                                            rootProps={{ 'data-testid': '1' }}
+                                        />
+                                    </div>
                                 </div>
-                                <div className="col s4 blue lighten-2 card result-box" >
-                                    <h4 >{maleAnswer.toFixed(0)}% of <br /> men</h4>
+                                <div className="row col s12 card result-box valign-wrapper" >
+                                    <span className='col s6 flow-text'>{maleAnswer.toFixed(0)}% of men</span>
+                                    <div className='col s6'>
+                                        <Chart className=''
+                                            height={'8vh'}
+                                            chartType="PieChart"
+                                            loader={<div>Loading Chart</div>}
+                                            data={[['Pac Man', 'Percentage'], ['', maleAnswer], ['', 100 - maleAnswer]]}
+                                            options={{
+                                                pieStartAngle: 180,
+                                                legend: 'none',
+                                                pieSliceText: 'none',
+                                                tooltip: { trigger: 'none' },
+                                                slices: {
+                                                    0: { color: '#56b1bf' },
+                                                    1: { color: 'transparent' },
+                                                },
+                                            }}
+                                            rootProps={{ 'data-testid': '2' }}
+                                        />
+                                    </div>
                                 </div>
-                                <div className="col s4 pink card result-box" >
-                                    <h4 >{femaleAnswer.toFixed(0)}% of <br /> women</h4>
+                                <div className="row col s12 card result-box valign-wrapper" >
+                                    <span className='col s6 flow-text'>{femaleAnswer.toFixed(0)}% of women</span>
+                                    <div className='col s6'>
+                                        <Chart className=''
+                                            height={'8vh'}
+                                            chartType="PieChart"
+                                            loader={<div>Loading Chart</div>}
+                                            data={[['Pac Man', 'Percentage'], ['', femaleAnswer], ['', 100 - femaleAnswer]]}
+                                            options={{
+
+                                                pieStartAngle: 180,
+                                                legend: 'none',
+                                                pieSliceText: 'none',
+                                                tooltip: { trigger: 'none' },
+                                                slices: {
+                                                    0: { color: '#d73a31' },
+                                                    1: { color: 'transparent' },
+                                                },
+                                            }}
+                                            rootProps={{ 'data-testid': '3' }}
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="modal-footer">
-                        <a className="modal-close waves-effect waves-red btn-flat">
-                            Disagree
-            </a>
-                        <a className="modal-close waves-effect waves-green btn-flat">
-                            Agree
-            </a>
+                        <button className="modal-close waves-effect waves-red btn-flat valign-wrapper">
+                            Next Question  <i className="large material-icons red-text">arrow_forward</i>
+                        </button>
                     </div>
                 </div>
-            </div>
+
+            </div >
+
         );
     }
 }
