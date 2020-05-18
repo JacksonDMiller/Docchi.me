@@ -20,6 +20,10 @@ class Profile extends Component {
         this.props.updateAccount({ gender: event.target.value });
     };
 
+    onChangeInvoice = event => {
+        this.setState({ [event.target.name]: event.target.value });
+    };
+
     onSubmit = event => {
         event.preventDefault();
 
@@ -33,10 +37,8 @@ class Profile extends Component {
     }
 
     handleClick = event => {
-        var invoiceToSend = this.state.invoice;
         const payInvoice = getFirebase().functions().httpsCallable('payInvoice')
-
-        payInvoice({ invoice: invoiceToSend }).then((result) => {
+        payInvoice({ invoice: this.state.invoice }).then((result) => {
             M.toast({ html: result.data.message });
         })
     }
@@ -160,7 +162,7 @@ class Profile extends Component {
                         <div className="modal-content">
                             <h4>Please enter a lighting invoice</h4>
 
-                            <textarea onChange={this.onChange} defaultValue={this.state.invoice} name="invoice" className='materialize-textarea'></textarea>
+                            <textarea onChange={this.onChangeInvoice} defaultValue={this.state.invoice} name="invoice" className='materialize-textarea'></textarea>
                         </div>
 
                         <div className="modal-footer">
