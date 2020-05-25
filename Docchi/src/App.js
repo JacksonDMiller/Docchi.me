@@ -8,6 +8,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Navbar from './Components/Navbar'
 import 'materialize-css/dist/css/materialize.min.css';
 import Profile from './Components/Profile'
+import Approver from './Components/Approver'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
       <Route path='/signout' component={SignOut} />
       <Route path='/createquestion' component={CreateQuestion} />
       <Route path='/profile' component={Profile} />
+      <Route path='/approver' component={Approver} />
       </Switch>
     </div>
     </BrowserRouter>

@@ -144,14 +144,14 @@ export const newQuestion = (previousQuestion) => {
         autoId += chars.charAt(Math.floor(Math.random() * chars.length));
       }
       let questionRef = firestore.collection("questions")
-      questionRef.where(firebase.firestore.FieldPath.documentId(), '>=', autoId)
+      questionRef.where('status', '==', 'Approved').where(firebase.firestore.FieldPath.documentId(), '>=', autoId)
         .limit(1).get().then(async doc => {
           if (doc.docs[0]) {
             if (previousQuestion) {
               var previousQuestionId = previousQuestion.id
-
             }
             if (previousQuestionId === doc.docs[0].id) {
+              console.log('trying again')
               getQuestion();
             }
             else {
@@ -160,9 +160,48 @@ export const newQuestion = (previousQuestion) => {
             }
           }
         }
-        )
+        ).catch(err => console.log(err))
     }
     getQuestion()
+  }
+
+}
+
+
+
+// change this to approve question then call it from approver page.
+export const approveQuestion = (question) => {
+  return (dispatch, getState, getFirebase) => {
+
+    const firestore = getFirebase().firestore()
+
+    firestore.collection('questions').doc(question).update({
+      status: 'Approved'
+    }).then(() => {
+      dispatch({ type: 'QUESTION_APPROVAL_SUCCESS' });
+    }).catch((err) => {
+      alert(err)
+      dispatch({ type: 'QUESTION_APPROVAL_ERROR', err });
+    });
+
+  }
+
+}
+
+export const rejectQuestion = (question) => {
+  return (dispatch, getState, getFirebase) => {
+
+    const firestore = getFirebase().firestore()
+
+    firestore.collection('questions').doc(question).update({
+      status: 'Rejected'
+    }).then(() => {
+      dispatch({ type: 'QUESTION_REJECTED_SUCCESS' });
+    }).catch((err) => {
+      alert(err)
+      dispatch({ type: 'QUESTION_REJECTED_ERROR', err });
+    });
+
   }
 
 }

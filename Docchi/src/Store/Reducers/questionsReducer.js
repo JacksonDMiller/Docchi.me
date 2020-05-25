@@ -32,6 +32,20 @@ const questionReducer = (state = initState, action) => {
                   ...state,
                   previousQuestion: false
             }
+            case 'QUESTION_APPROVAL_SUCCESS': return {
+                  state
+            }
+            case 'QUESTION_APPROVAL_ERROR':
+                  return {
+                        state
+                  }
+            case 'QUESTION_REJECT_SUCCESS': return {
+                  state
+            }
+            case 'QUESTION_REJECT_ERROR':
+                  return {
+                        state
+                  }
             default:
                   return state;
 

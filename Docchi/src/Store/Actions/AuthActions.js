@@ -66,37 +66,37 @@ export const createAccountWithGoogle = (newUser) => {
 
 
 
-export const createAccount = (newUser) => {
-  return (dispatch, getState, getFirebase) => {
-    const firebase = getFirebase()
-    const firestore = getFirebase().firestore()
-    firebase.auth().createUserWithEmailAndPassword(
-      newUser.email,
-      newUser.password
-    ).then(resp => {
-      return firestore.collection('users').doc(resp.user.uid).set({
-        userId: resp.user.uid,
-        dateCreated: new Date(),
-        gender: newUser.gender,
-        age: newUser.age,
-        userName: newUser.userName,
-        email: newUser.email,
-        sats: 100,
-        submissions: [],
-        achievements: [],
-        questionsAnswered: [],
-        renegadeCounter: 0,
-        conformistCounter: 0,
-      });
-    })
-      .then(() => {
-        dispatch({ type: 'SIGNUP_SUCCESS' });
-        M.toast({ html: 'Thanks for signing up here is 100 sats on us' });
-      }).catch((err) => {
-        dispatch({ type: 'SIGNUP_ERROR', err });
-      });
-  }
-}
+// export const createAccount = (newUser) => {
+//   return (dispatch, getState, getFirebase) => {
+//     const firebase = getFirebase()
+//     const firestore = getFirebase().firestore()
+//     firebase.auth().createUserWithEmailAndPassword(
+//       newUser.email,
+//       newUser.password
+//     ).then(resp => {
+//       return firestore.collection('users').doc(resp.user.uid).set({
+//         userId: resp.user.uid,
+//         dateCreated: new Date(),
+//         gender: newUser.gender,
+//         age: newUser.age,
+//         userName: newUser.userName,
+//         email: newUser.email,
+//         sats: 300,
+//         submissions: [],
+//         achievements: [],
+//         questionsAnswered: [],
+//         renegadeCounter: 0,
+//         conformistCounter: 0,
+//       });
+//     })
+//       .then(() => {
+//         dispatch({ type: 'SIGNUP_SUCCESS' });
+//         M.toast({ html: 'Thanks for signing up here is 300 sats on us' });
+//       }).catch((err) => {
+//         dispatch({ type: 'SIGNUP_ERROR', err });
+//       });
+//   }
+// }
 
 export const updateAccount = (details) => {
   return (dispatch, getState, getFirebase) => {
