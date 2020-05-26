@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
 import { connect } from 'react-redux';
+import { createAccountWithGoogle } from '../Store/Actions/AuthActions'
 
 
 class Welcome extends Component {
@@ -42,7 +43,7 @@ class Welcome extends Component {
                         <div className="container row reultsModal">
 
                             <p className="col s12 flow-text red-text">Welcome!</p>
-                            <button class="loginBtn loginBtn--google">
+                            <button onClick={this.props.createAccountWithGoogle} className="modal-close loginBtn loginBtn--google">
                                 Login with Google
                                 </button>
                             <p>to earn sats and have your answers recoreded or</p>
@@ -61,10 +62,10 @@ class Welcome extends Component {
 }
 
 
-const mapStateToProps = (state) => {
+const mapDispatchToProps = (dispatch) => {
     return {
-        previousQuestion: state.questions.previousQuestion
+        createAccountWithGoogle: () => dispatch(createAccountWithGoogle())
     }
 }
 
-export default connect(mapStateToProps)(Welcome)
+export default connect(null, mapDispatchToProps)(Welcome)

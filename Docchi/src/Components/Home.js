@@ -47,7 +47,6 @@ class Home extends Component {
         this.props.newQuestion();
 
         let visited = localStorage["alreadyVisited"];
-        console.log(visited)
         if (visited) {
             this.setState({ welcome: false })
             //do not view Popup
@@ -80,7 +79,6 @@ class Home extends Component {
         if (questions.currentQuestion) {
             return (
                 <div className='container'>
-                    {console.log(profile)}
                     {this.state.welcome === true ?
                         <Welcome />
                         : null}
