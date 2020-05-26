@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { updateQuestion, newQuestion } from '../Store/Actions/QuestionActions'
 import { Redirect } from 'react-router-dom'
-import Modal from './Modal'
+import Results from './Results'
+import Welcome from './Welcome'
 
 class Home extends Component {
 
-    state = { width: 0, height: 0 };
+    state = { width: 0, height: 0, welcome: '' };
     updateWindowDimensions = this.updateWindowDimensions.bind(this);
 
     addSwitch = (width) => {
@@ -45,7 +45,18 @@ class Home extends Component {
         this.updateWindowDimensions();
         window.addEventListener('resize', this.updateWindowDimensions);
         this.props.newQuestion();
-        
+
+        let visited = localStorage["alreadyVisited"];
+        console.log(visited)
+        if (visited) {
+            this.setState({ welcome: false })
+            //do not view Popup
+        } else {
+            //this is the first time
+            localStorage["alreadyVisited"] = true;
+            this.setState({ welcome: true });
+        }
+
     }
 
     componentWillUnmount() {
@@ -69,6 +80,10 @@ class Home extends Component {
         if (questions.currentQuestion) {
             return (
                 <div className='container'>
+                    {console.log(profile)}
+                    {this.state.welcome === true ?
+                        <Welcome />
+                        : null}
                     <div className='row'>
                         <h2 className='col s12'>Would you rather</h2>
                         <div className='row col s12'>
@@ -81,8 +96,8 @@ class Home extends Component {
 
                     {this.addSwitch(this.state.width)}
 
-{previousQuestion ? <Modal/> : null }
-                  
+                    {previousQuestion ? <Results /> : null}
+
 
 
 
@@ -114,7 +129,5 @@ const mapDispatchToProps = (dispatch) => {
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
-    firestoreConnect([
-        { collection: 'questions' },
-    ])
+
 )(Home)

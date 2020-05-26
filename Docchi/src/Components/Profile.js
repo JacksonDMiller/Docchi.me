@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { firestoreConnect, getFirebase } from 'react-redux-firebase'
+import { getFirebase } from 'react-redux-firebase'
 import { compose } from 'redux'
 import M from 'materialize-css/dist/js/materialize.min.js';
-import { updateAccount } from '../Store/Actions/AuthActions'
+import { updateAccount } from '../Store/Actions/AuthActions';
+import { getSubmitedQuestions } from '../Store/Actions/QuestionActions'
 
 
 
@@ -34,6 +35,7 @@ class Profile extends Component {
         var tabElems = document.querySelectorAll('.tabs');
         M.Modal.init(elems, null);
         M.Tabs.init(tabElems, { swipeable: true });
+        this.props.getSubmitedQuestions('dIHLZrf2i4OSTHGzoyYqjHCICti1')
     }
 
     handleClick = event => {
@@ -47,20 +49,23 @@ class Profile extends Component {
     render() {
 
 
-        const { profile, questions } = this.props
-        if (profile.submissions) {
-            this.sub = profile.submissions.map((item, key) => {
-                if (questions[item]) {
-                    return (<li key={item} className="collection-item avatar">
-                        <i className="material-icons circle">change_history</i>
-                        <span className="title">Would you rather...</span>
-                        <p>{questions[item].answerOne} or {questions[item].answerTwo}</p>
-                        {questions[item].status === 'Pending' ? <p className='red-text'>Pending</p> : <p className='green-text'>Approved</p>}
-                    </li>
+        const { profile, submissions } = this.props
 
-                    )
-                }
-                else { return (null) }
+
+        if (submissions) {
+            this.sub = submissions.map((item) => {
+                return (<li key={Math.floor(Math.random() * 10000)} className="collection-item avatar">
+                    <i className="material-icons circle">change_history</i>
+                    <span className="title">Would you rather...</span>
+                    <p>{item.answerOne} or {item.answerTwo}</p>
+                    {item.status === 'Pending' ? <p className='blue-text'>Pending</p> : null}
+                    {item.status === 'Approved' ? <p className='green-text'>Approved</p> : null}
+                    {item.status === 'Rejected' ? <p className='red-text'>Rejected</p> : null}
+
+
+
+                </li>
+                )
             }
             );
         }
@@ -71,7 +76,7 @@ class Profile extends Component {
                         <h2 className='col s12 left-align'>{profile.userName}</h2>
                         {profile.gender === '' ?
                             <form onSubmit={this.onSubmit} action="" className="row">
-                                <h6>Please select your gender to continue.</h6>
+                                <h4>Please select your gender to continue.</h4>
                                 <p className='col s6'>
                                     <label>
                                         <input
@@ -100,7 +105,7 @@ class Profile extends Component {
 
                             : <div><h6 className='col s3 left-align grey-text'>Gender:</h6> <h6 className='col s9 left-align'>{profile.gender}</h6></div>}
                         <h6 className='input-field col s3 left-align grey-text'>Sats Earned:</h6><h6 className='input-field col s3 left-align'>{profile.sats} </h6>
-                        <button data-target="modal1" className="left-align input-field col s3 indigo darken-3 btn modal-trigger">Withdraw</button>
+                        <button data-target="modal1" className="left-align input-field col s4 m3 indigo darken-3 btn modal-trigger">Withdraw</button>
                     </div>
 
                     <div className="row">
@@ -181,20 +186,18 @@ const mapStateToProps = (state) => {
     return {
         auth: state.firebase.auth,
         profile: state.firebase.profile,
-        questions: state.firestore.data.questions,
+        submissions: state.questions.submissions,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         updateAccount: (details) => dispatch(updateAccount(details)),
+        getSubmitedQuestions: (id) => dispatch(getSubmitedQuestions(id))
     }
 }
 
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
-    firestoreConnect([
-        { collection: 'questions' },
-    ])
 )(Profile)

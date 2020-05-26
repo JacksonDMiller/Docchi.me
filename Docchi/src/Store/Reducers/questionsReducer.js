@@ -46,6 +46,13 @@ const questionReducer = (state = initState, action) => {
                   return {
                         state
                   }
+            case 'QUESTIONS_FETCH_ERROR':
+                  return state;
+            case 'QUESTIONS_FETCH_SUCCESS':
+                  return {
+                        ...state,
+                        submissions: action.submissions
+                  }
             default:
                   return state;
 

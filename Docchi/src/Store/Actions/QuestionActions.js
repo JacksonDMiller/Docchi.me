@@ -8,10 +8,12 @@ export const createQuestion = (newQuestion) => {
     const auth = getState().firebase.auth
     const firebase = getFirebase()
     const firestore = getFirebase().firestore()
+
     firestore.collection('questions').add({
       ...newQuestion,
       createdAt: new Date(),
       creator: profile.userName,
+      creatorId: profile.userId,
       status: 'Pending'
     }).then((docRef) => {
       var profileRef = firestore.collection('users').doc(auth.uid)
@@ -201,6 +203,30 @@ export const rejectQuestion = (question) => {
       alert(err)
       dispatch({ type: 'QUESTION_REJECTED_ERROR', err });
     });
+
+  }
+
+}
+
+
+
+export const getSubmitedQuestions = (id) => {
+  return (dispatch, getState, getFirebase) => {
+
+    const firestore = getFirebase().firestore()
+
+    let questionRef = firestore.collection("questions")
+    questionRef.where('creatorId', '==', id).get()
+      .then((snapshot) => {
+        var submissions = []
+        snapshot.forEach(doc => {
+          submissions.push(doc.data())
+        })
+        dispatch({ type: 'QUESTIONS_FETCH_SUCCESS', submissions });
+      }).catch((err) => {
+        alert(err)
+        dispatch({ type: 'QUESTIONS_FETCH_ERROR', err });
+      });
 
   }
 

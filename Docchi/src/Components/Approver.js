@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { firestoreConnect, getFirebase } from 'react-redux-firebase'
+import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
-import M from 'materialize-css/dist/js/materialize.min.js';
 import { approveQuestion, rejectQuestion } from '../Store/Actions/QuestionActions'
 import { Redirect } from 'react-router-dom'
 
@@ -34,10 +33,10 @@ class Approver extends Component {
 
 
     render() {
-        const { profile, questions } = this.props
+        const { questions } = this.props
         console.log(questions)
-        const { auth, authError } = this.props;
-        if (auth.uid != 'jC5mtZZ4drfVoFQf7yjUNSp4bf03') return <Redirect to='/' />
+        const { auth, } = this.props;
+        if (auth.uid !== 'dIHLZrf2i4OSTHGzoyYqjHCICti1') return <Redirect to='/' />
 
 
 
@@ -56,6 +55,7 @@ class Approver extends Component {
 
                     </li>
                 }
+                else return null
             })
         }
 
