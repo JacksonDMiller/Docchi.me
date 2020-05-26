@@ -35,7 +35,6 @@ class Profile extends Component {
         var tabElems = document.querySelectorAll('.tabs');
         M.Modal.init(elems, null);
         M.Tabs.init(tabElems, { swipeable: true });
-        this.props.getSubmitedQuestions('dIHLZrf2i4OSTHGzoyYqjHCICti1')
     }
 
     handleClick = event => {
@@ -50,7 +49,8 @@ class Profile extends Component {
 
 
         const { profile, submissions } = this.props
-
+        if (profile.userId)
+        {this.props.getSubmitedQuestions(this.props.profile.userId)}
 
         if (submissions) {
             this.sub = submissions.map((item) => {

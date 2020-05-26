@@ -42,7 +42,7 @@ class Welcome extends Component {
                         <div className="container row reultsModal">
 
                             <p className="col s12 flow-text red-text">Welcome!</p>
-                            <button class="loginBtn loginBtn--google">
+                            <button class="modal-close loginBtn loginBtn--google">
                                 Login with Google
                                 </button>
                             <p>to earn sats and have your answers recoreded or</p>
