@@ -170,8 +170,6 @@ export const newQuestion = (previousQuestion) => {
 }
 
 
-
-// change this to approve question then call it from approver page.
 export const approveQuestion = (question) => {
   return (dispatch, getState, getFirebase) => {
 

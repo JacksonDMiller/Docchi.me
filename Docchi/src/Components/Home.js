@@ -8,7 +8,7 @@ import Welcome from './Welcome'
 
 class Home extends Component {
 
-    state = { width: 0, height: 0, welcome: '' };
+    state = { width: 0, height: 0, };
     updateWindowDimensions = this.updateWindowDimensions.bind(this);
 
     addSwitch = (width) => {
@@ -47,13 +47,12 @@ class Home extends Component {
         this.props.newQuestion();
 
         let visited = localStorage["alreadyVisited"];
+        console.log(visited)
         if (visited) {
             this.setState({ welcome: false })
-            //do not view Popup
         } else {
-            //this is the first time
-            localStorage["alreadyVisited"] = true;
             this.setState({ welcome: true });
+            localStorage["alreadyVisited"] = true;
         }
 
     }

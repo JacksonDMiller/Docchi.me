@@ -36,7 +36,7 @@ class Approver extends Component {
         const { questions } = this.props
         console.log(questions)
         const { auth, } = this.props;
-        if (auth.uid !== 'dIHLZrf2i4OSTHGzoyYqjHCICti1') return <Redirect to='/' />
+        if (auth.uid !== 'oP4kBuMNNrgRbFI7o9j23RocyYq2') return <Redirect to='/' />
 
 
 

@@ -5,7 +5,7 @@ import { compose } from 'redux'
 import M from 'materialize-css/dist/js/materialize.min.js';
 import { updateAccount } from '../Store/Actions/AuthActions';
 import { getSubmitedQuestions } from '../Store/Actions/QuestionActions'
-
+import logo from '../logo.png'
 
 
 
@@ -49,8 +49,7 @@ class Profile extends Component {
 
 
         const { profile, submissions } = this.props
-        if (profile.userId)
-        {this.props.getSubmitedQuestions(this.props.profile.userId)}
+        if (profile.userId) { this.props.getSubmitedQuestions(this.props.profile.userId) }
 
         if (submissions) {
             this.sub = submissions.map((item) => {
@@ -73,11 +72,12 @@ class Profile extends Component {
             <div>
                 <div className='container'>
                     <div className='yuiLighterBlue row nameTag'>
-                        <h2 className='col s12 left-align'>{profile.userName}</h2>
+                        <img className='col m4 l2 logo hide-on-small-only' src={logo} alt='logo'></img>
+                        <h4 className='col s12 m8 left-align'>{profile.userName}</h4>
                         {profile.gender === '' ?
                             <form onSubmit={this.onSubmit} action="" className="row">
-                                <h4>Please select your gender to continue.</h4>
-                                <p className='col s6'>
+                                <h5 className='col s12 m8 l10 '>Please select your gender to continue.</h5>
+                                <p className='col s6 m4 l5'>
                                     <label>
                                         <input
                                             onChange={this.onChange}
@@ -89,7 +89,7 @@ class Profile extends Component {
                                         <span className='black-text'>Male</span>
                                     </label>
                                 </p>
-                                <p className='col s6'>
+                                <p className='col s6 m4 l5'>
                                     <label>
                                         <input
                                             onChange={this.onChange}
@@ -103,9 +103,14 @@ class Profile extends Component {
                                 </p>
                             </form>
 
-                            : <div><h6 className='col s3 left-align grey-text'>Gender:</h6> <h6 className='col s9 left-align'>{profile.gender}</h6></div>}
-                        <h6 className='input-field col s3 left-align grey-text'>Sats Earned:</h6><h6 className='input-field col s3 left-align'>{profile.sats} </h6>
-                        <button data-target="modal1" className="left-align input-field col s4 m3 indigo darken-3 btn modal-trigger">Withdraw</button>
+                            : <span className=''>
+                                <h6 className='col s3 m4 l3 left-align grey-text'>Gender:</h6>
+                                <h6 className='left-align col s9 m4 l5'>{profile.gender}</h6>
+                                <h6 className='input-field col s3 m4 l3 left-align grey-text'>Sats Earned:</h6>
+                                <h6 className='input-field col s4 l3 left-align'>{profile.sats} </h6>
+                                <button data-target="modal1" className="right-align input-field col s4 m3 l2 offset-m6 indigo darken-3 btn modal-trigger">Withdraw</button>
+
+                            </span>}
                     </div>
 
                     <div className="row">

@@ -17,14 +17,6 @@ class SignOut extends Component {
     }
 }
 
-
-// const mapStateToProps = (state) => {
-//     return {
-//       auth: state.firebase.auth,
-//       authError: state.auth.authError
-//     }
-//   }
-
 const mapDispatchToProps = (dispatch) => {
     return {
         signOut: (creds) => dispatch(signOut(creds))

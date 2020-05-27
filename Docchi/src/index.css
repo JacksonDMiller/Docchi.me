@@ -170,3 +170,8 @@ code {
 .loginBtn--google:hover, .loginBtn--google:focus {
   background: #e74b37;
 }
+
+.logo {
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+}

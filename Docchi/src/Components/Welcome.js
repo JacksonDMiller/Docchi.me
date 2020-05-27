@@ -43,11 +43,7 @@ class Welcome extends Component {
                         <div className="container row reultsModal">
 
                             <p className="col s12 flow-text red-text">Welcome!</p>
-<<<<<<< HEAD
                             <button onClick={this.props.createAccountWithGoogle} className="modal-close loginBtn loginBtn--google">
-=======
-                            <button class="modal-close loginBtn loginBtn--google">
->>>>>>> 2e974f46d960cb570bdae698c0929659693a69f1
                                 Login with Google
                                 </button>
                             <p>to earn sats and have your answers recoreded or</p>
