@@ -14,18 +14,19 @@ function App() {
 
   return (
     <BrowserRouter>
-    <div className="App">
-      <Navbar />
-      <Switch>
-      <Route exact path='/' component={Home} />
-      <Route path='/home' component={Home} />
-      <Route path='/signin' component={SignIn} />
-      <Route path='/signout' component={SignOut} />
-      <Route path='/createquestion' component={CreateQuestion} />
-      <Route path='/profile' component={Profile} />
-      <Route path='/approver' component={Approver} />
-      </Switch>
-    </div>
+      <div className="App">
+        <Navbar />
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route path='/home' component={Home} />
+          <Route path='/signin' component={SignIn} />
+          <Route path='/signout' component={SignOut} />
+          <Route path='/createquestion' component={CreateQuestion} />
+          <Route path='/profile' component={Profile} />
+          {/*  approver can only be accesed by the admin userId. it is set in the approver file */}
+          <Route path='/approver' component={Approver} />
+        </Switch>
+      </div>
     </BrowserRouter>
   );
 }

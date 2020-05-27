@@ -51,6 +51,7 @@ class Profile extends Component {
         const { profile, submissions } = this.props
         if (profile.userId) { this.props.getSubmitedQuestions(this.props.profile.userId) }
 
+        // create a list of the users past submisions 
         if (submissions) {
             this.sub = submissions.map((item) => {
                 return (<li key={Math.floor(Math.random() * 10000)} className="collection-item avatar">
@@ -74,43 +75,45 @@ class Profile extends Component {
                     <div className='yuiLighterBlue row nameTag'>
                         <img className='col m4 l2 logo hide-on-small-only' src={logo} alt='logo'></img>
                         <h4 className='col s12 m8 left-align'>{profile.userName}</h4>
-                        {profile.gender === '' ?
-                            <form onSubmit={this.onSubmit} action="" className="row">
-                                <h5 className='col s12 m8 l10 '>Please select your gender to continue.</h5>
-                                <p className='col s6 m4 l5'>
-                                    <label>
-                                        <input
-                                            onChange={this.onChange}
-                                            type="radio"
-                                            name="gender"
-                                            value="Male"
-                                            className="form-check-input"
-                                        />
-                                        <span className='black-text'>Male</span>
-                                    </label>
-                                </p>
-                                <p className='col s6 m4 l5'>
-                                    <label>
-                                        <input
-                                            onChange={this.onChange}
-                                            type="radio"
-                                            name="gender"
-                                            value="Female"
-                                            className="form-check-input"
-                                        />
-                                        <span className='black-text'>Female</span>
-                                    </label>
-                                </p>
-                            </form>
+                        {
+                            // ask the user to select the gender for recording reults 
+                            profile.gender === '' ?
+                                <form onSubmit={this.onSubmit} action="" className="row">
+                                    <h5 className='col s12 m8 l10 '>Please select your gender to continue.</h5>
+                                    <p className='col s6 m4 l5'>
+                                        <label>
+                                            <input
+                                                onChange={this.onChange}
+                                                type="radio"
+                                                name="gender"
+                                                value="Male"
+                                                className="form-check-input"
+                                            />
+                                            <span className='black-text'>Male</span>
+                                        </label>
+                                    </p>
+                                    <p className='col s6 m4 l5'>
+                                        <label>
+                                            <input
+                                                onChange={this.onChange}
+                                                type="radio"
+                                                name="gender"
+                                                value="Female"
+                                                className="form-check-input"
+                                            />
+                                            <span className='black-text'>Female</span>
+                                        </label>
+                                    </p>
+                                </form>
 
-                            : <span className=''>
-                                <h6 className='col s3 m4 l3 left-align grey-text'>Gender:</h6>
-                                <h6 className='left-align col s9 m4 l5'>{profile.gender}</h6>
-                                <h6 className='input-field col s3 m4 l3 left-align grey-text'>Sats Earned:</h6>
-                                <h6 className='input-field col s4 l3 left-align'>{profile.sats} </h6>
-                                <button data-target="modal1" className="right-align input-field col s4 m3 l2 offset-m6 indigo darken-3 btn modal-trigger">Withdraw</button>
+                                : <span className=''>
+                                    <h6 className='col s3 m4 l3 left-align grey-text'>Gender:</h6>
+                                    <h6 className='left-align col s9 m4 l5'>{profile.gender}</h6>
+                                    <h6 className='input-field col s3 m4 l3 left-align grey-text'>Sats Earned:</h6>
+                                    <h6 className='input-field col s4 l3 left-align'>{profile.sats} </h6>
+                                    <button data-target="modal1" className="right-align input-field col s4 m3 l2 offset-m6 indigo darken-3 btn modal-trigger">Withdraw</button>
 
-                            </span>}
+                                </span>}
                     </div>
 
                     <div className="row">
@@ -120,6 +123,8 @@ class Profile extends Component {
                                 <li className="tab col s3"><a className="black-text" href="#Submissions">Submissions</a></li>
                             </ul>
                         </div>
+
+                        {/* list the achievemnts that can be completed to earn sats and check if they have been completed yet */}
                         <div id="Achievements" className="col s12">
 
                             {profile.isEmpty === false ?
@@ -166,7 +171,8 @@ class Profile extends Component {
 
                 </div>
 
-                {/* Modal */}
+                {/* Modal for inputing a lignting invoice*/}
+
                 <div id="modal1" className="modal">
                     <form action="">
                         <div className="modal-content input-field">

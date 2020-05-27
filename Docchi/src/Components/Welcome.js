@@ -3,7 +3,7 @@ import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
 import { connect } from 'react-redux';
 import { createAccountWithGoogle } from '../Store/Actions/AuthActions'
-
+// a modal the displays on the first vist for the site. Requesting a user to login in with google. 
 
 class Welcome extends Component {
 

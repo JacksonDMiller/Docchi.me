@@ -24,6 +24,7 @@ const questionReducer = (state = initState, action) => {
                   return state;
             case 'QUESTION_FETCH_SUCCESS':
                   return {
+                        // sets the previous question so that it can be used to show reults 
                         ...state,
                         currentQuestion: action.question,
                         previousQuestion: action.previousQuestion
@@ -50,6 +51,7 @@ const questionReducer = (state = initState, action) => {
                   return state;
             case 'QUESTIONS_FETCH_SUCCESS':
                   return {
+                        // sets a list of submisions to be used on the profile page to display a users old submissions 
                         ...state,
                         submissions: action.submissions
                   }

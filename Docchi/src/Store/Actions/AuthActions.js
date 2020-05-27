@@ -1,21 +1,5 @@
 import M from 'materialize-css/dist/js/materialize.min.js';
 
-export const signIn = (credentials) => {
-  return (dispatch, getState, getFirebase) => {
-    const firebase = getFirebase();
-
-    firebase.auth().signInWithEmailAndPassword(
-      credentials.email,
-      credentials.password
-    ).then(() => {
-      dispatch({ type: 'LOGIN_SUCCESS' });
-    }).catch((err) => {
-      dispatch({ type: 'LOGIN_ERROR', err });
-    });
-
-  }
-}
-
 export const signOut = () => {
   return (dispatch, getState, getFirebase) => {
     const firebase = getFirebase();
@@ -26,7 +10,7 @@ export const signOut = () => {
   }
 }
 
-
+// create an account or login. If creating an account create a document in the users datbase for the new user 
 export const createAccountWithGoogle = (newUser) => {
 
   return (dispatch, getState, getFirebase) => {
@@ -63,7 +47,7 @@ export const createAccountWithGoogle = (newUser) => {
   }
 }
 
-
+// used to select the users gender. Should be expanded in the future to allow for chaning your user name. 
 export const updateAccount = (details) => {
   return (dispatch, getState, getFirebase) => {
     const firestore = getFirebase().firestore()

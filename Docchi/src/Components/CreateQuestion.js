@@ -3,18 +3,18 @@ import { createQuestion } from '../Store/Actions/QuestionActions'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import M from 'materialize-css/dist/js/materialize.min.js';
-
-
+// form for submiting new questions. Questions start in pending and must be approved before appearing on the site. 
+// answers set to 1 instead of 0 to avoid dividing by 0 errors 
 class CreateQuestion extends Component {
   state = {
     answerOne: '',
     answerTwo: '',
-    responseOne: 0,
-    responseTwo: 0,
-    maleResOne: 0,
-    maleResTwo: 0,
-    femaleResOne: 0,
-    femaleResTwo: 0,
+    responseOne: 1,
+    responseTwo: 1,
+    maleResOne: 1,
+    maleResTwo: 1,
+    femaleResOne: 1,
+    femaleResTwo: 1,
     creator: ''
   }
 

@@ -16,13 +16,14 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import keys from './keys'
 
+// wait for auth
 function AuthIsLoaded({ children }) {
     const auth = useSelector(state => state.firebase.auth)
     if (!isLoaded(auth)) return <div></div>;
     return children
 }
 
-
+// set up firebase 
 const fbConfig = keys;
 
 const rrfConfig = {
@@ -34,7 +35,7 @@ const rrfConfig = {
 firebase.initializeApp(fbConfig)
 
 firebase.firestore()
-// for testing
+// uncoment for testing functions 
 // firebase.functions().useFunctionsEmulator('http://localhost:5001')
 firebase.functions()
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk.withExtraArgument(getFirebase))))
@@ -57,4 +58,3 @@ ReactDOM.render(
     </Provider>, document.getElementById('root'));
 
 
-// serviceWorker.unregister();

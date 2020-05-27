@@ -5,7 +5,8 @@ import { connect } from 'react-redux'
 import Chart from "react-google-charts";
 
 class Results extends Component {
-
+    // a modal that displays 3 pie charts of the reults of the previous question using google charts
+    // i would like to stop the highlight functionality of clicking on google charts but have not been able to find out how yet.
 
     componentDidMount() {
         const options = {

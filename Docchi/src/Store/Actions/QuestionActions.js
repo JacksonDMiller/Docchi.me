@@ -1,7 +1,7 @@
 import firebase from 'firebase/app'
 import M from 'materialize-css/dist/js/materialize.min.js';
 
-
+// creates a question and checks if it is your first question submited if so it awards the first question achievment 
 export const createQuestion = (newQuestion) => {
   return (dispatch, getState, getFirebase) => {
     const profile = getState().firebase.profile;
@@ -38,7 +38,8 @@ export const createQuestion = (newQuestion) => {
   }
 }
 
-
+// used for incrimitning responses. datbase rules prevent increasing response fields by more that one.
+// makes checks for the Renegade and generalist achievemnts 
 export const updateQuestion = (question) => {
   return (dispatch, getState, getFirebase) => {
     var conformistCounter = 0;
@@ -128,7 +129,8 @@ export const updateQuestion = (question) => {
 
 }
 
-
+// gets the next question. uses a randomly generated Id and then selects the question closes to that randomly generated id. 
+// it's not a very good random. Some questions are far more likely to be selected. Could be fixed by using a field that can be updated and updating it eachtime it is selected.
 export const newQuestion = (previousQuestion) => {
 
 
@@ -169,7 +171,8 @@ export const newQuestion = (previousQuestion) => {
 
 }
 
-
+// for approving questions from the admin page. 
+// low security this should be improved
 export const approveQuestion = (question) => {
   return (dispatch, getState, getFirebase) => {
 
@@ -188,6 +191,8 @@ export const approveQuestion = (question) => {
 
 }
 
+// for rejecting questions from the admin page. 
+// low security this should be improved
 export const rejectQuestion = (question) => {
   return (dispatch, getState, getFirebase) => {
 
@@ -207,7 +212,7 @@ export const rejectQuestion = (question) => {
 }
 
 
-
+// grab a list of questions that a user has submited to output on the profile page.
 export const getSubmitedQuestions = (id) => {
   return (dispatch, getState, getFirebase) => {
 

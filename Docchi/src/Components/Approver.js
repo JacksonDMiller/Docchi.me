@@ -6,11 +6,8 @@ import { approveQuestion, rejectQuestion } from '../Store/Actions/QuestionAction
 import { Redirect } from 'react-router-dom'
 
 
-
+// admin console for approving new questions must have correct user id to access it. 
 class Approver extends Component {
-
-
-
 
     onSubmit = event => {
         event.preventDefault();
@@ -31,7 +28,6 @@ class Approver extends Component {
 
     }
 
-
     render() {
         const { questions } = this.props
         console.log(questions)
@@ -40,7 +36,7 @@ class Approver extends Component {
 
 
 
-
+// get the datbase of questions and map it to a ul with buttons for approving and rejecting questions 
         if (questions) {
             this.sub = questions.map((value, index) => {
                 if (questions[index].status === "Pending") {
@@ -89,7 +85,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-
+// get the datbase of questions. could be cleaned up to only read questions in the pending status
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     firestoreConnect([

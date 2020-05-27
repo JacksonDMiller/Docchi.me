@@ -6,11 +6,14 @@ import { Redirect } from 'react-router-dom'
 import Results from './Results'
 import Welcome from './Welcome'
 
+// main page 
+
 class Home extends Component {
 
     state = { width: 0, height: 0, };
     updateWindowDimensions = this.updateWindowDimensions.bind(this);
 
+    // for displaying the correct ad size
     addSwitch = (width) => {
         switch (true) {
             case (width < 500): return <iframe title='aAds-small' className='aAds-small' data-aa="1373080" src="//ad.a-ads.com/1373080?size=320x50" scrolling="no" allowtransparency="true"></iframe>;
@@ -42,6 +45,7 @@ class Home extends Component {
 
 
     componentDidMount() {
+        // for selecting the correct adsize based on screen dimensions 
         this.updateWindowDimensions();
         window.addEventListener('resize', this.updateWindowDimensions);
         this.props.newQuestion();
@@ -91,9 +95,12 @@ class Home extends Component {
                         <h2 className='col s12 noWhiteSpace'>?</h2>
                     </div>
 
-                    {this.addSwitch(this.state.width)}
+                    {//selecting the ad to display
+                        this.addSwitch(this.state.width)}
 
-                    {previousQuestion ? <Results /> : null}
+                    {// display a modal wit the results of the previous question.
+
+                        previousQuestion ? <Results /> : null}
 
 
 
