@@ -136,7 +136,6 @@ export const newQuestion = (previousQuestion) => {
 
   return async (dispatch, getState, getFirebase) => {
     dispatch({ type: 'QUESTION_REQUESTED' });
-    const firebase = getFirebase()
     const firestore = getFirebase().firestore()
     var question = ''
 

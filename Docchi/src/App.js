@@ -7,6 +7,7 @@ import Navbar from './Components/Navbar'
 import 'materialize-css/dist/css/materialize.min.css';
 import Profile from './Components/Profile'
 import Approver from './Components/Approver'
+import AboutUs from './Components/AboutUs'
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Navbar />
         <Switch>
           <Route exact path='/' component={Home} />
+          <Route exact path='/aboutus' component={AboutUs} />
           <Route path='/home' component={Home} />
           <Route path='/createquestion' component={CreateQuestion} />
           <Route path='/profile' component={Profile} />

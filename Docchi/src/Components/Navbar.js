@@ -15,7 +15,6 @@ class Navbar extends Component {
     }
 
     render() {
-        const { profile } = this.props
 
         return (
             <div>
@@ -28,6 +27,7 @@ class Navbar extends Component {
                                 <li><Link to='/'>Play</Link></li>
                                 <li > <a href='#!' onClick={this.props.createAccountWithGoogle}>My Profile</a></li>
                                 <li > <a href='#!' onClick={this.props.createAccountWithGoogle}>Create a Question</a></li>
+                                <li>  <Link to='/aboutus'>About Us</Link></li>
                                 <li>  <a href='#!' onClick={this.props.createAccountWithGoogle}>Sign in</a></li>
 
                             </ul> :
@@ -35,6 +35,7 @@ class Navbar extends Component {
                                 <li> <Link to='/'>Play</Link></li>
                                 <li> <Link to='/profile'>My Profile</Link></li>
                                 <li>  <Link to='/createquestion'>Create Question</Link></li>
+                                <li>  <Link to='/aboutus'>About Us</Link></li>
                                 <li>  <a href='/' onClick={this.props.signOut}>Log Out</a></li>
                             </ul>}
                     </div>
@@ -47,6 +48,7 @@ class Navbar extends Component {
                             <li className="sidenav-close"><Link to='/'>Play</Link></li>
                             <li className="sidenav-close"> <a href='#!' onClick={this.props.createAccountWithGoogle}>My Profile</a></li>
                             <li className="sidenav-close"> <a href='#!' onClick={this.props.createAccountWithGoogle}>Create a Question</a></li>
+                            <li className="sidenav-close"> <Link to='/aboutus'>About Us</Link></li>
                             <li className="sidenav-close">  <a href='#!' onClick={this.props.createAccountWithGoogle}>Sign in</a></li>
 
 
@@ -57,6 +59,7 @@ class Navbar extends Component {
                             <li className="sidenav-close"><Link to='/'>Play</Link></li>
                             <li className="sidenav-close"> <Link to='/profile'>My Profile</Link></li>
                             <li className="sidenav-close"> <Link to='/createquestion'>Create a Question</Link></li>
+                            <li className="sidenav-close"> <Link to='/aboutus'>About Us</Link></li>
                             <li className="sidenav-close"> <a href='/' onClick={this.props.signOut}>Log Out</a></li>
                         </ul>}
                 </ul>
@@ -68,7 +71,6 @@ class Navbar extends Component {
 const mapStateToProps = (state) => {
     return {
         auth: state.firebase.auth,
-        profile: state.firebase.profile
     }
 }
 

@@ -150,7 +150,7 @@ class Results extends Component {
                     </div>
                     <div className="modal-footer">
 
-                        <a className="modal-close btn-flat btn waves-effect waves-teal modalWhite flow-text nextQuestionBtn"><i className="material-icons large right red-text">arrow_forward</i>Next Question</a>
+                        <a href='#!' className="modal-close btn-flat btn waves-effect waves-teal modalWhite flow-text nextQuestionBtn"><i className="material-icons large right red-text">arrow_forward</i>Next Question</a>
                         {/* <button className="modal-close waves-effect waves-red btn-flat valign-wrapper">
                             Next Question  <i className="large material-icons red-text">arrow_forward</i>
                         </button> */}

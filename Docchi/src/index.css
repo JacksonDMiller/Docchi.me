@@ -188,3 +188,7 @@ code {
 .nextQuestionBtn:hover {
   background-color: #fafafa !important;
 }
+
+.socialButton {
+  padding: 5px;
+}
