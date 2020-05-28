@@ -93,7 +93,7 @@ class Results extends Component {
                                                 tooltip: { trigger: 'none' },
                                                 slices: {
                                                     0: { color: '#ffab40' },
-                                                    1: { color: 'transparent' },
+                                                    1: { color: 'grey' },
                                                 },
                                             }}
                                             rootProps={{ 'data-testid': '1' }}
@@ -115,7 +115,7 @@ class Results extends Component {
                                                 tooltip: { trigger: 'none' },
                                                 slices: {
                                                     0: { color: '#56b1bf' },
-                                                    1: { color: 'transparent' },
+                                                    1: { color: 'grey' },
                                                 },
                                             }}
                                             rootProps={{ 'data-testid': '2' }}
@@ -138,7 +138,7 @@ class Results extends Component {
                                                 tooltip: { trigger: 'none' },
                                                 slices: {
                                                     0: { color: '#d73a31' },
-                                                    1: { color: 'transparent' },
+                                                    1: { color: 'grey' },
                                                 },
                                             }}
                                             rootProps={{ 'data-testid': '3' }}
@@ -150,7 +150,7 @@ class Results extends Component {
                     </div>
                     <div className="modal-footer">
 
-                        <a className="modal-close btn-flat btn waves-effect waves-teal modalWhite flow-text"><i className="material-icons large right red-text">arrow_forward</i>Next Question</a>
+                        <a className="modal-close btn-flat btn waves-effect waves-teal modalWhite flow-text nextQuestionBtn"><i className="material-icons large right red-text">arrow_forward</i>Next Question</a>
                         {/* <button className="modal-close waves-effect waves-red btn-flat valign-wrapper">
                             Next Question  <i className="large material-icons red-text">arrow_forward</i>
                         </button> */}

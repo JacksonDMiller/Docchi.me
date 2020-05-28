@@ -142,14 +142,12 @@ export const newQuestion = (previousQuestion) => {
 
     function getQuestion() {
 
-      let autoId = Math.floor(Math.random() * 1000000)
+      let randomNumber = Math.floor(Math.random() * 1000000)
       let questionRef = firestore.collection("questions")
-      console.log(autoId)
       questionRef
-        .where('randomNumber', '>=', autoId)
+        .where('randomNumber', '>=', randomNumber)
         // .where('status', '==', 'Approved')
         .limit(1).get().then(async doc => {
-          console.log(doc)
           if (doc.docs[0]) {
             if (previousQuestion) {
               var previousQuestionId = previousQuestion.id

@@ -184,3 +184,7 @@ code {
 .modalWhite {
   background-color: #fafafa
 }
+
+.nextQuestionBtn:hover {
+  background-color: #fafafa !important;
+}

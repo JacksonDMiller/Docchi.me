@@ -26,12 +26,14 @@ class Navbar extends Component {
                         {!this.props.auth.uid ?
                             <ul id="nav-mobile" className="right hide-on-med-and-down">
                                 <li><Link to='/'>Play</Link></li>
+                                <li > <a href='#!' onClick={this.props.createAccountWithGoogle}>My Profile</a></li>
+                                <li > <a href='#!' onClick={this.props.createAccountWithGoogle}>Create a Question</a></li>
                                 <li>  <a href='#!' onClick={this.props.createAccountWithGoogle}>Sign in</a></li>
 
                             </ul> :
                             <ul id="nav-mobile" className="right hide-on-med-and-down">
-                                <li> <Link to='/profile'>{profile.userName}</Link></li>
                                 <li> <Link to='/'>Play</Link></li>
+                                <li> <Link to='/profile'>My Profile</Link></li>
                                 <li>  <Link to='/createquestion'>Create Question</Link></li>
                                 <li>  <a href='/' onClick={this.props.signOut}>Log Out</a></li>
                             </ul>}
@@ -41,13 +43,19 @@ class Navbar extends Component {
                 <ul id="slide-out" className="sidenav">
                     {!this.props.auth.uid ?
                         <ul>
+                            <li className="sidenav-close yuiBlue"> <Link className='white-text' to='/'>Docchi</Link></li>
                             <li className="sidenav-close"><Link to='/'>Play</Link></li>
+                            <li className="sidenav-close"> <a href='#!' onClick={this.props.createAccountWithGoogle}>My Profile</a></li>
+                            <li className="sidenav-close"> <a href='#!' onClick={this.props.createAccountWithGoogle}>Create a Question</a></li>
                             <li className="sidenav-close">  <a href='#!' onClick={this.props.createAccountWithGoogle}>Sign in</a></li>
+
+
 
                         </ul> :
                         <ul>
                             <li className="sidenav-close yuiBlue"> <Link className='white-text' to='/'>Docchi</Link></li>
-                            <li className="sidenav-close"> <Link to='/profile'>{profile.userName}</Link></li>
+                            <li className="sidenav-close"><Link to='/'>Play</Link></li>
+                            <li className="sidenav-close"> <Link to='/profile'>My Profile</Link></li>
                             <li className="sidenav-close"> <Link to='/createquestion'>Create a Question</Link></li>
                             <li className="sidenav-close"> <a href='/' onClick={this.props.signOut}>Log Out</a></li>
                         </ul>}
