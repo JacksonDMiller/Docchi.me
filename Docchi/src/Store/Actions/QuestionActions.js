@@ -119,6 +119,7 @@ export const updateQuestion = (question) => {
       maleResOne: question.maleResOne,
       responseOne: question.responseOne,
       responseTwo: question.responseTwo,
+      randomNumber: Math.floor(Math.random() * 1000000)
     }).then(() => {
       dispatch({ type: 'QUESTION_UPDATE_SUCCESS', question });
     }).catch((err) => {
@@ -130,7 +131,6 @@ export const updateQuestion = (question) => {
 }
 
 // gets the next question. uses a randomly generated Id and then selects the question closes to that randomly generated id. 
-// it's not a very good random. Some questions are far more likely to be selected. Could be fixed by using a field that can be updated and updating it eachtime it is selected.
 export const newQuestion = (previousQuestion) => {
 
 
@@ -141,22 +141,20 @@ export const newQuestion = (previousQuestion) => {
     var question = ''
 
     function getQuestion() {
-      console.log('i was called')
-      const chars =
-        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      let autoId = '';
-      for (let i = 0; i < 20; i++) {
-        autoId += chars.charAt(Math.floor(Math.random() * chars.length));
-      }
+
+      let autoId = Math.floor(Math.random() * 1000000)
       let questionRef = firestore.collection("questions")
-      questionRef.where('status', '==', 'Approved').where(firebase.firestore.FieldPath.documentId(), '>=', autoId)
+      console.log(autoId)
+      questionRef
+        .where('randomNumber', '>=', autoId)
+        // .where('status', '==', 'Approved')
         .limit(1).get().then(async doc => {
+          console.log(doc)
           if (doc.docs[0]) {
             if (previousQuestion) {
               var previousQuestionId = previousQuestion.id
             }
             if (previousQuestionId === doc.docs[0].id) {
-              console.log('trying again')
               getQuestion();
             }
             else {
@@ -215,7 +213,6 @@ export const rejectQuestion = (question) => {
 
 // grab a list of questions that a user has submited to output on the profile page.
 export const getSubmitedQuestions = (id) => {
-  console.log('profile get list was called')
   return (dispatch, getState, getFirebase) => {
 
     const firestore = getFirebase().firestore()
@@ -236,3 +233,4 @@ export const getSubmitedQuestions = (id) => {
   }
 
 }
+

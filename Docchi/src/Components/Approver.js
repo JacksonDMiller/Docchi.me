@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
-import { approveQuestion, rejectQuestion } from '../Store/Actions/QuestionActions'
+import { approveQuestion, rejectQuestion, } from '../Store/Actions/QuestionActions'
 import { Redirect } from 'react-router-dom'
 
 
@@ -28,6 +28,7 @@ class Approver extends Component {
 
     }
 
+
     render() {
         const { questions } = this.props
         console.log(questions)
@@ -35,11 +36,11 @@ class Approver extends Component {
         if (auth.uid !== 'oP4kBuMNNrgRbFI7o9j23RocyYq2') return <Redirect to='/' />
 
 
-
-// get the datbase of questions and map it to a ul with buttons for approving and rejecting questions 
+        // get the datbase of questions and map it to a ul with buttons for approving and rejecting questions 
         if (questions) {
             this.sub = questions.map((value, index) => {
-                if (questions[index].status === "Pending") {
+
+                if (questions[index].status === 'Pending') {
 
                     return <li key={index} className="collection-item avatar">
                         <i className="material-icons circle">change_history</i>
@@ -82,6 +83,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         approveQuestion: (details) => dispatch(approveQuestion(details)),
         rejectQuestion: (details) => dispatch(rejectQuestion(details)),
+
+
+
     }
 }
 

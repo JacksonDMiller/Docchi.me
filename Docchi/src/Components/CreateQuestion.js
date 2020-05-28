@@ -15,7 +15,9 @@ class CreateQuestion extends Component {
     maleResTwo: 1,
     femaleResOne: 1,
     femaleResTwo: 1,
-    creator: ''
+    creator: '',
+    // for selecting a random question
+    randomNumber: Math.floor(Math.random() * 1000000)
   }
 
   onChange = event => {
