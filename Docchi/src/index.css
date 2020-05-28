@@ -175,3 +175,12 @@ code {
   margin-top: 1vh;
   margin-bottom: 1vh;
 }
+
+.reults-text {
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+.modalWhite {
+  background-color: #fafafa
+}

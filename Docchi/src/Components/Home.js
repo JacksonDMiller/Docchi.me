@@ -51,7 +51,6 @@ class Home extends Component {
         this.props.newQuestion();
 
         let visited = localStorage["alreadyVisited"];
-        console.log(visited)
         if (visited) {
             this.setState({ welcome: false })
         } else {

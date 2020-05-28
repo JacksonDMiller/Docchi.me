@@ -35,6 +35,7 @@ class Profile extends Component {
         var tabElems = document.querySelectorAll('.tabs');
         M.Modal.init(elems, null);
         M.Tabs.init(tabElems, { swipeable: true });
+        this.props.getSubmitedQuestions(this.props.auth.uid) 
     }
 
     handleClick = event => {
@@ -49,7 +50,6 @@ class Profile extends Component {
 
 
         const { profile, submissions } = this.props
-        if (profile.userId) { this.props.getSubmitedQuestions(this.props.profile.userId) }
 
         // create a list of the users past submisions 
         if (submissions) {
@@ -161,7 +161,7 @@ class Profile extends Component {
                         </div>
                         <div id="Submissions" className="col s12">
                             <div className=''>
-                                {this.sub === undefined || this.sub.length === 0 ? <span>Nothing here yet. Submit a question.</span> : <ul className="collection left-align">{this.sub}</ul>}
+                                {this.sub === undefined || this.sub.length === 0 ? <ul className="collection left-align"><li className="valign-wrapper collection-item avatar flow-text">Nothing here yet. Submit a question.</li></ul> : <ul className="collection left-align">{this.sub}</ul>}
                             </div>
                         </div>
                     </div>

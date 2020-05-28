@@ -72,10 +72,10 @@ class Results extends Component {
                 >
 
                     <div className="modal-content reultsModal">
-                        <div className="container row reultsModal">
+                        <div className="row reultsModal">
 
-                            <p className="col s12 flow-text">You would rather {this.props.previousQuestion.answer === 'one' ? this.props.previousQuestion.answerOne : this.props.previousQuestion.answerTwo} than {this.props.previousQuestion.answer === 'one' ? this.props.previousQuestion.answerTwo : this.props.previousQuestion.answerOne}. </p>
-                            <p className="col s12 flow-text">See who agreed with you!</p>
+                            <p className="col s12 flow-text reults-text">You would rather {this.props.previousQuestion.answer === 'one' ? this.props.previousQuestion.answerOne : this.props.previousQuestion.answerTwo} than {this.props.previousQuestion.answer === 'one' ? this.props.previousQuestion.answerTwo : this.props.previousQuestion.answerOne}. </p>
+                            <p className="col s12 flow-text reults-text">See who agreed with you!</p>
 
                             <div className="col s12 row result-box-container">
                                 <div className="row col s12 card result-box valign-wrapper" >
@@ -149,11 +149,13 @@ class Results extends Component {
                         </div>
                     </div>
                     <div className="modal-footer">
-                        <button className="modal-close waves-effect waves-red btn-flat valign-wrapper">
+
+                        <a className="modal-close btn-flat btn waves-effect waves-teal modalWhite flow-text"><i className="material-icons large right red-text">arrow_forward</i>Next Question</a>
+                        {/* <button className="modal-close waves-effect waves-red btn-flat valign-wrapper">
                             Next Question  <i className="large material-icons red-text">arrow_forward</i>
-                        </button>
+                        </button> */}
                     </div>
-                </div>
+                </div >
 
             </div >
 

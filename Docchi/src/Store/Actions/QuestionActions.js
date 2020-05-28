@@ -141,6 +141,7 @@ export const newQuestion = (previousQuestion) => {
     var question = ''
 
     function getQuestion() {
+      console.log('i was called')
       const chars =
         'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
       let autoId = '';
@@ -214,6 +215,7 @@ export const rejectQuestion = (question) => {
 
 // grab a list of questions that a user has submited to output on the profile page.
 export const getSubmitedQuestions = (id) => {
+  console.log('profile get list was called')
   return (dispatch, getState, getFirebase) => {
 
     const firestore = getFirebase().firestore()

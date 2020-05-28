@@ -1,8 +1,6 @@
 import React from 'react';
 import './App.css';
 import Home from './Components/Home'
-import SignIn from './Components/SignIn';
-import SignOut from './Components/SignOut';
 import CreateQuestion from './Components/CreateQuestion'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Navbar from './Components/Navbar'
@@ -19,8 +17,6 @@ function App() {
         <Switch>
           <Route exact path='/' component={Home} />
           <Route path='/home' component={Home} />
-          <Route path='/signin' component={SignIn} />
-          <Route path='/signout' component={SignOut} />
           <Route path='/createquestion' component={CreateQuestion} />
           <Route path='/profile' component={Profile} />
           {/*  approver can only be accesed by the admin userId. it is set in the approver file */}

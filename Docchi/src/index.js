@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-// import * as serviceWorker from './serviceWorker';
 import { Provider, useSelector } from 'react-redux'
 import rootReducer from './Store/Reducers/rootReducer'
 import { createStore, applyMiddleware } from 'redux'
@@ -52,7 +51,7 @@ ReactDOM.render(
     <Provider store={store}>
         <ReactReduxFirebaseProvider {...rrfProps}>
             <AuthIsLoaded>
-                <App />
+                    <App />
             </AuthIsLoaded>
         </ReactReduxFirebaseProvider>
     </Provider>, document.getElementById('root'));
