@@ -15,7 +15,7 @@
     "firebase-admin": "^8.6.0",
     "firebase-functions": "^3.3.0",
     "fs": "0.0.1-security",
-    "grpc": "^1.24.2",
+    "grpc": "^1.24.9",
     "grpc-promise": "^1.4.0",
     "ln-service": "^47.16.0",
     "prop-types": "^15.7.2"
